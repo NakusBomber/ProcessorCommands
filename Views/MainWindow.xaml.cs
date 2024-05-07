@@ -1,4 +1,5 @@
-﻿using ProcessorCommands.ViewModels;
+﻿using ProcessorCommands.Helpers;
+using ProcessorCommands.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace ProcessorCommands
     {
         public MainWindow()
         {
+            LanguageManager.Refresh();
             InitializeComponent();
             this.DataContext = new MainViewModel();
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProcessorCommands.Helpers
 {
@@ -30,8 +31,14 @@ namespace ProcessorCommands.Helpers
         {
             CurrentLanguage = lang;
 
-            // TODO: rework
-            //Application.Restart();
+            var oldWindows = Application.Current.Windows;
+            Application.Current.MainWindow = new MainWindow();
+            Application.Current.MainWindow.Show();
+
+            foreach (Window window in oldWindows)
+            {
+                window.Close();
+            }
         }
 
         /// <summary>
