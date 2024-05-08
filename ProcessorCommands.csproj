@@ -66,8 +66,12 @@
     <Compile Include="Components\CommandButton.xaml.cs">
       <DependentUpon>CommandButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\InputDataGrid.xaml.cs">
+      <DependentUpon>InputDataGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\LanguageManager.cs" />
-    <Compile Include="ValidationRules\DecimalValidationRule.cs" />
+    <Compile Include="Helpers\ValidationRules\DecimalValidationRule.cs" />
+    <Compile Include="Models\DecimalInputItem.cs" />
     <Compile Include="Models\InputItemDataGrid.cs" />
     <Compile Include="Models\ProgramStatus.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
@@ -85,6 +89,10 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="Components\CommandButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\InputDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

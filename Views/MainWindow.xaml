@@ -8,7 +8,6 @@
         xmlns:helpers="clr-namespace:ProcessorCommands.Helpers"
         xmlns:vm="clr-namespace:ProcessorCommands.ViewModels"
         xmlns:components="clr-namespace:ProcessorCommands.Components"
-        xmlns:validationrules="clr-namespace:ProcessorCommands.ValidationRules"
         mc:Ignorable="d"
         Title="Демонстрація виконання команди"
         Height="575"
@@ -21,7 +20,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/Styles/ToolBarStyle.xaml"/>
-                <ResourceDictionary Source="../Resources/Styles/DataGridStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -89,40 +87,12 @@
                           Grid.Column="0">
                     <StackPanel>
                         <TextBlock Text="Регістр команди"/>
-                        <TextBox/>
-                        <DataGrid ItemsSource="{Binding DataRegisters}"
-                                  AutoGenerateColumns="False"
-                                  CanUserResizeRows="False"
-                                  CanUserAddRows="False"
-                                  RowHeaderWidth="0"
-                                  CanUserDeleteRows="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="{x:Static resources:General.DataRegisterDescription}"
-                                                    CanUserSort="False"
-                                                    Binding="{Binding Label}"
-                                                    IsReadOnly="True"
-                                                    CanUserReorder="False"
-                                                    HeaderStyle="{StaticResource DataGridHeaderStyle}"
-                                                    ElementStyle="{StaticResource DataGridElementStyle}"
-                                                    Width="*">
-                                </DataGridTextColumn>
-                                <DataGridTextColumn Header="Значення"
-                                                    CanUserReorder="False"
-                                                    CanUserSort="False"
-                                                    HeaderStyle="{StaticResource DataGridHeaderStyle}"
-                                                    ElementStyle="{StaticResource DataGridElementStyle}"
-                                                    EditingElementStyle="{StaticResource DataGridErrorStyle}"
-                                                    Width="2*">
-                                    <DataGridTextColumn.Binding>
-                                        <Binding Path="Value" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                            <Binding.ValidationRules>
-                                                <validationrules:DecimalValidationRule/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </DataGridTextColumn.Binding>
-                                </DataGridTextColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <TextBox x:Name="testt"/>
+
+                        <components:InputDataGrid ItemsSource="{Binding DataContext.DataRegisters, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                  IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                  HeaderLabel="{x:Static resources:General.DataRegisterDescription}"
+                                                  HeaderValue="Значення"/>
                     </StackPanel>
                 </GroupBox>
             </Grid>

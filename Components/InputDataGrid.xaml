@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="ProcessorCommands.Components.InputDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ProcessorCommands.Components"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Styles/DataGridStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <DataGrid ItemsSource="{Binding ItemsSource}"
+              AutoGenerateColumns="False"
+              CanUserResizeRows="False"
+              CanUserAddRows="False"
+              RowHeaderWidth="0"
+              RowHeight="22"
+              CanUserDeleteRows="False">
+        <DataGrid.Columns>
+            <DataGridTextColumn CanUserSort="False"
+                                Binding="{Binding Label}"
+                                IsReadOnly="True"
+                                CanUserReorder="False"
+                                HeaderStyle="{StaticResource DataGridHeaderStyle}"
+                                ElementStyle="{StaticResource DataGridElementStyle}"
+                                Width="*">
+                <DataGridTextColumn.Header>
+                    <TextBlock Text="{Binding DataContext.HeaderLabel,
+                               RelativeSource={RelativeSource AncestorType={x:Type local:InputDataGrid}}}"/>
+                </DataGridTextColumn.Header>
+            </DataGridTextColumn>
+            <DataGridTemplateColumn CanUserReorder="False"
+                                    CanUserSort="False"
+                                    HeaderStyle="{StaticResource DataGridHeaderStyle}"
+                                    Width="2*">
+                <DataGridTemplateColumn.Header>
+                    <TextBlock Text="{Binding DataContext.HeaderValue,
+                               RelativeSource={RelativeSource AncestorType={x:Type local:InputDataGrid}}}"/>
+                </DataGridTemplateColumn.Header>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBox IsReadOnly="{Binding DataContext.IsBlockInput,
+                                 RelativeSource={RelativeSource AncestorType={x:Type local:InputDataGrid}}}"
+                                 Style="{StaticResource DataGridErrorStyle}"
+                                 Text="{Binding Value,
+                                 Mode=TwoWay,
+                                 ValidatesOnDataErrors=True,
+                                 NotifyOnValidationError=True,
+                                 UpdateSourceTrigger=PropertyChanged}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

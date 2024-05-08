@@ -1,10 +1,13 @@
-﻿using ProcessorCommands.Models;
+﻿using ProcessorCommands.Helpers;
+using ProcessorCommands.Models;
 using ProcessorCommands.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace ProcessorCommands.Commands
 {
@@ -23,7 +26,7 @@ namespace ProcessorCommands.Commands
 
         public override bool CanExecute(object parameter)
         {
-            return _vm.Status != ProgramStatus.Start;
+            return _vm.Status != ProgramStatus.Start && !_vm.HasError;
         }
 
     }

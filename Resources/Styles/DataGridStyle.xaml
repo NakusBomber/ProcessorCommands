@@ -3,16 +3,23 @@
     <Style x:Key="DataGridHeaderStyle" TargetType="DataGridColumnHeader">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
-    <Style x:Key="DataGridElementStyle" TargetType="TextBlock">
-        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-    </Style>
-    <Style x:Key="DataGridErrorStyle" TargetType="{x:Type TextBox}">
+    <Style x:Key="DataGridBaseStyle" TargetType="FrameworkElement">
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
                 <Setter Property="ToolTip"
                         Value="{Binding RelativeSource={RelativeSource Self},
                         Path=(Validation.Errors)/ErrorContent}"/>
+                <Setter Property="ToolTip.Foreground" Value="Red"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DataGridErrorStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource DataGridBaseStyle}">
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="DataGridElementStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource DataGridBaseStyle}">
+        <Setter Property="TextAlignment" Value="Center"/>
     </Style>
 </ResourceDictionary>

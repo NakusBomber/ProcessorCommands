@@ -2,8 +2,10 @@
 using ProcessorCommands.Helpers;
 using ProcessorCommands.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Resources;
 using System.Text;
@@ -25,7 +27,7 @@ namespace ProcessorCommands.ViewModels
 			DataRegisters = new ObservableCollection<InputItemDataGrid>();
             for (int i = 0; i < 8; i++)
             {
-				DataRegisters.Add(new InputItemDataGrid($"{i+1}", ""));
+				DataRegisters.Add(new DecimalInputItem($"{i+1}", ""));
             }
 
         }
@@ -37,55 +39,26 @@ namespace ProcessorCommands.ViewModels
 			set
 			{
 				_status = value;
-				StatusDescription = _status.GetDescription();
-                OnPropertyChanged();
-			}
-		}
-
-		private string _statusDescription;
-		public string StatusDescription
-		{
-            get => _statusDescription;
-			private set
-			{
-				_statusDescription = value;
 				OnPropertyChanged();
-			}
-        }
-
-        private ICommand _startCommand;
-		public ICommand StartCommand
-        {
-			get => _startCommand;
-			private set
-			{
-				_startCommand = value;
+				OnPropertyChanged(nameof(StatusDescription));
+                OnPropertyChanged(nameof(IsBlockInput));
 			}
 		}
+		
 
-        private ICommand _stopCommand;
-        public ICommand StopCommand
-        {
-            get => _stopCommand;
-            private set
-			{
-				_stopCommand = value;
-			}
-        }
+        #region Commands
+        public ICommand StartCommand { get; private set; }
+        public ICommand StopCommand { get; private set; }
+        public ICommand ChangeLanguageCommand { get; private set; }
 
-		private ICommand _changeLanguageCommand;
-		public ICommand ChangeLanguageCommand
-		{
-			get => _changeLanguageCommand;
-			private set
-			{
-				_changeLanguageCommand = value;
-			}
-		}
+        #endregion
 
+        public string StatusDescription => Status.GetDescription();
+        public bool IsBlockInput => (Status != ProgramStatus.Nothing);
+        public bool HasError => DataRegisters.Any(item => item.HasErrors);
 
-		private ObservableCollection<InputItemDataGrid> _dataRegisters;
-		public ObservableCollection<InputItemDataGrid> DataRegisters
+        private ObservableCollection<InputItemDataGrid> _dataRegisters;
+        public ObservableCollection<InputItemDataGrid> DataRegisters
         {
 			get => _dataRegisters;
 			private set
@@ -94,5 +67,5 @@ namespace ProcessorCommands.ViewModels
 			}
 		}
 
-	}
+    }
 }
