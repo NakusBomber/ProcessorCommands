@@ -70,7 +70,6 @@
       <DependentUpon>InputDataGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\LanguageManager.cs" />
-    <Compile Include="Helpers\ValidationRules\DecimalValidationRule.cs" />
     <Compile Include="Models\DecimalInputItem.cs" />
     <Compile Include="Models\InputItemDataGrid.cs" />
     <Compile Include="Models\ProgramStatus.cs" />
