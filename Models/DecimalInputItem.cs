@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProcessorCommands.Helpers.Validations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,28 +12,9 @@ namespace ProcessorCommands.Models
     {
         public DecimalInputItem(string label, string value) : base(label, value)
         {
+            Validation = new DecimalValidation();
         }
 
-        public override string Value
-        {
-            get => _value;
-            set
-            {
-                
-                ClearErrors();
-
-                if (value != string.Empty)
-                {
-                    if (!int.TryParse(value, out int intValue))
-                        SetError("Буквы не допускаются");
-
-                    if (intValue < 0 || intValue > 255)
-                        SetError("Только байтовые значения (0 - 255)");
-                }
-               
-                _value = value;
-                OnPropertyChanged();
-            }
-        }
+        protected override IValidateValue Validation { get; set; }
     }
 }

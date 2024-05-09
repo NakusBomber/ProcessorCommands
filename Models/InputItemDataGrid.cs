@@ -1,4 +1,5 @@
-﻿using ProcessorCommands.ViewModels;
+﻿using ProcessorCommands.Helpers.Validations;
+using ProcessorCommands.ViewModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,8 +22,29 @@ namespace ProcessorCommands.Models
 
         public string Label { get; set; }
 
-        protected string _value;
-        public abstract string Value { get; set; }
+        protected abstract IValidateValue Validation { get; set; }
+
+        private string _value;
+        public string Value
+        {
+            get => _value;
+            set
+            {
+                ClearErrors();
+
+                if(Validation != null)
+                {
+                    var errors = Validation.Validate(value);
+                    foreach (var error in errors)
+                    {
+                        SetError(error);
+                    }
+                }
+                
+                _value = value;
+                OnPropertyChanged();
+            }
+        }
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
@@ -36,7 +58,7 @@ namespace ProcessorCommands.Models
             return _errors[propertyName];
         }
 
-        protected void SetError(string error, [CallerMemberName] string propertyName = null)
+        private void SetError(string error, [CallerMemberName] string propertyName = null)
         {
             if (!_errors.ContainsKey(propertyName))
                 _errors[propertyName] = new List<string>();
@@ -48,7 +70,7 @@ namespace ProcessorCommands.Models
             }
         }
 
-        protected void ClearErrors([CallerMemberName] string propertyName = null)
+        private void ClearErrors([CallerMemberName] string propertyName = null)
         {
             if (_errors.ContainsKey(propertyName))
             {
