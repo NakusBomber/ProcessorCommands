@@ -123,6 +123,9 @@
   <data name="Start" xml:space="preserve">
     <value>Початок виконання</value>
   </data>
+  <data name="Step" xml:space="preserve">
+    <value>Крок</value>
+  </data>
   <data name="Stop" xml:space="preserve">
     <value>Зупинка виконання</value>
   </data>

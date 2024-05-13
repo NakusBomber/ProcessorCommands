@@ -61,7 +61,9 @@
     </ApplicationDefinition>
     <Compile Include="Commands\ChangeLanguageCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\RefreshCommand.cs" />
     <Compile Include="Commands\StartCommand.cs" />
+    <Compile Include="Commands\StepCommand.cs" />
     <Compile Include="Commands\StopCommand.cs" />
     <Compile Include="Components\CommandButton.xaml.cs">
       <DependentUpon>CommandButton.xaml</DependentUpon>
@@ -70,10 +72,16 @@
       <DependentUpon>InputDataGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\LanguageManager.cs" />
+    <Compile Include="Helpers\Validations\BinaryDecimalValidation.cs" />
+    <Compile Include="Helpers\Validations\BinaryValidation.cs" />
     <Compile Include="Helpers\Validations\DecimalValidation.cs" />
+    <Compile Include="Helpers\Validations\HexadecimalValidation.cs" />
     <Compile Include="Helpers\Validations\IValidateValue.cs" />
+    <Compile Include="Models\BinaryDecimalInputItem.cs" />
+    <Compile Include="Models\BinaryInputItem.cs" />
     <Compile Include="Models\DecimalInputItem.cs" />
-    <Compile Include="Models\InputItemDataGrid.cs" />
+    <Compile Include="Models\HexadecimalInputItem.cs" />
+    <Compile Include="Models\InputItem.cs" />
     <Compile Include="Models\ProgramStatus.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Resources\General.Designer.cs">
@@ -102,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\ImageStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\InputItemStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

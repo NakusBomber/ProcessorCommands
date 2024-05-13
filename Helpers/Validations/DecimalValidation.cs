@@ -21,6 +21,9 @@ namespace ProcessorCommands.Helpers.Validations
             if (intValue < 0 || intValue > 255)
                 errors.Add("Только байтовые значения (0 - 255)");
 
+            if (intValue > 0 && value.StartsWith("0"))
+                errors.Add("Ввод не должен начинаться с 0");
+
             return errors;
         }
     }

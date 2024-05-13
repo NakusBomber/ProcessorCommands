@@ -25,11 +25,11 @@ namespace ProcessorCommands.Components
 
 
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(ObservableCollection<InputItemDataGrid>), typeof(InputDataGrid), new PropertyMetadata(null));
+            DependencyProperty.Register("ItemsSource", typeof(ObservableCollection<InputItem>), typeof(InputDataGrid), new PropertyMetadata(null));
 
-        public ObservableCollection<InputItemDataGrid> ItemsSource
+        public ObservableCollection<InputItem> ItemsSource
         {
-            get { return (ObservableCollection<InputItemDataGrid>)GetValue(ItemsSourceProperty); }
+            get { return (ObservableCollection<InputItem>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 

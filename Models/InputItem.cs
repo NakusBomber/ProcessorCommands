@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace ProcessorCommands.Models
 {
-    public abstract class InputItemDataGrid : ViewModelBase, INotifyDataErrorInfo
+    public abstract class InputItem : ViewModelBase, INotifyDataErrorInfo
     {
         private readonly Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
-        public InputItemDataGrid(string label, string value)
+        public InputItem(string label, string value)
         {
             this.Label = label;
             this.Value = value;
@@ -22,7 +22,7 @@ namespace ProcessorCommands.Models
 
         public string Label { get; set; }
 
-        protected abstract IValidateValue Validation { get; set; }
+        protected IValidateValue Validation { get; set; }
 
         private string _value;
         public string Value
@@ -43,6 +43,7 @@ namespace ProcessorCommands.Models
                 
                 _value = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(HasErrors));
             }
         }
 

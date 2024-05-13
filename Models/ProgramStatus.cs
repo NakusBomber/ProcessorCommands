@@ -13,7 +13,8 @@ namespace ProcessorCommands.Models
     {
         Nothing,
         Start,
-        Stop
+        Stop,
+        Step
     }
 
     public static class ProgramStatusExtensions

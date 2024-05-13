@@ -79,6 +79,15 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Крок.
+        /// </summary>
+        internal static string Step {
+            get {
+                return ResourceManager.GetString("Step", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Зупинка виконання.
         /// </summary>
         internal static string Stop {

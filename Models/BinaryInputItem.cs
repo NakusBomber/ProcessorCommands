@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace ProcessorCommands.Models
 {
-    public class DecimalInputItem : InputItem
+    public class BinaryInputItem : InputItem
     {
-        public DecimalInputItem(string label, string value) : base(label, value)
+        public BinaryInputItem(string label, string value) : base(label, value)
         {
-            Validation = new DecimalValidation();
+            Validation = new BinaryValidation();
         }
 
     }

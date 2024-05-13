@@ -19,6 +19,8 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Styles/DataGridStyle.xaml"/>
+                <ResourceDictionary Source="../Resources/Styles/InputItemStyle.xaml"/>
                 <ResourceDictionary Source="../Resources/Styles/ToolBarStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -68,11 +70,11 @@
                                       ImageSource="/Media/stop.png"/>
 
             <components:CommandButton Text="Крок"
-                                      Command="{Binding DataContext.StopCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                      Command="{Binding DataContext.StepCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                       ImageSource="/Media/step.png"/>
 
             <components:CommandButton Text="Очистити"
-                                      Command="{Binding DataContext.StopCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                      Command="{Binding DataContext.RefreshCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                       ImageSource="/Media/refresh.png"/>
         </ToolBar>
         <StackPanel Grid.Row="2">
@@ -85,9 +87,21 @@
 
                 <GroupBox Header="Пристрій управління"
                           Grid.Column="0">
-                    <StackPanel>
-                        <TextBlock Text="Регістр команди"/>
-                        <TextBox x:Name="testt"/>
+                    <StackPanel Margin="6">
+
+                        <GroupBox Header="Регістр команди"
+                                  DataContext="{Binding CommandRegister}"
+                                  Style="{StaticResource GroupBoxStyle}">
+                            <GroupBox.Content>
+                                <TextBox Text="{Binding Value,
+                                         Mode=TwoWay,
+                                         ValidatesOnDataErrors=True,
+                                         NotifyOnValidationError=True,
+                                         UpdateSourceTrigger=PropertyChanged}"
+                                         IsReadOnly="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
+                                         Style="{StaticResource ItemInputErrorStyle}"/>
+                            </GroupBox.Content>
+                        </GroupBox>
 
                         <components:InputDataGrid ItemsSource="{Binding DataContext.DataRegisters, RelativeSource={RelativeSource AncestorType=Window}}"
                                                   IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"

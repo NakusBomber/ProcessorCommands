@@ -22,9 +22,12 @@ namespace ProcessorCommands.ViewModels
 			Status = ProgramStatus.Nothing;
 			StartCommand = new StartCommand(this);
 			StopCommand = new StopCommand(this);
+			StepCommand = new StepCommand(this);
+			RefreshCommand = new RefreshCommand(this);
 			ChangeLanguageCommand = new ChangeLanguageCommand();
 
-			DataRegisters = new ObservableCollection<InputItemDataGrid>();
+			CommandRegister = new HexadecimalInputItem("", "");
+			DataRegisters = new ObservableCollection<InputItem>();
             for (int i = 0; i < 8; i++)
             {
 				DataRegisters.Add(new DecimalInputItem($"{i+1}", ""));
@@ -44,21 +47,35 @@ namespace ProcessorCommands.ViewModels
                 OnPropertyChanged(nameof(IsBlockInput));
 			}
 		}
-		
 
-        #region Commands
-        public ICommand StartCommand { get; private set; }
+		private HexadecimalInputItem _commandRegister;
+
+		public HexadecimalInputItem CommandRegister
+		{
+			get { return _commandRegister; }
+			set
+			{
+				_commandRegister = value;
+				OnPropertyChanged();
+			}
+		}
+
+
+		#region Commands
+		public ICommand StartCommand { get; private set; }
         public ICommand StopCommand { get; private set; }
+		public ICommand StepCommand { get; private set; }
+        public ICommand RefreshCommand { get; private set; }
         public ICommand ChangeLanguageCommand { get; private set; }
 
         #endregion
 
         public string StatusDescription => Status.GetDescription();
-        public bool IsBlockInput => (Status != ProgramStatus.Nothing);
-        public bool HasError => DataRegisters.Any(item => item.HasErrors);
+        public bool IsBlockInput => (Status != ProgramStatus.Nothing && Status != ProgramStatus.Stop);
+        public bool HasError => DataRegisters.Any(item => item.HasErrors) || CommandRegister.HasErrors;
 
-        private ObservableCollection<InputItemDataGrid> _dataRegisters;
-        public ObservableCollection<InputItemDataGrid> DataRegisters
+        private ObservableCollection<InputItem> _dataRegisters;
+        public ObservableCollection<InputItem> DataRegisters
         {
 			get => _dataRegisters;
 			private set
