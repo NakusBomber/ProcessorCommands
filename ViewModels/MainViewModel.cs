@@ -31,6 +31,9 @@ namespace ProcessorCommands.ViewModels
             AldSecondRegister = new StandartInputItem();
             ResultRegister = new StandartInputItem();
             CounterAddress = new HexadecimalInputItem();
+            AddressRegister = new HexadecimalInputItem();
+            WordRegister = new BinaryDecimalInputItem();
+            AddressAdder = new HexadecimalInputItem();
 
 			DataRegisters = new ObservableCollection<InputItem>();
             for (int i = 0; i < 8; i++)
@@ -47,7 +50,11 @@ namespace ProcessorCommands.ViewModels
             {
                 IndexRegisters.Add(new DecimalInputItem($"{i + 1}"));
             }
-
+            RAM = new ObservableCollection<InputItem>();
+            for (int i = 0; i <= 0xFF; i++)
+            {
+                RAM.Add(new BinaryDecimalInputItem($"{i:X2}"));
+            }
         }
 
 		private ProgramStatus _status;
@@ -118,6 +125,38 @@ namespace ProcessorCommands.ViewModels
             }
         }
 
+        private InputItem _addressRegister;
+        public InputItem AddressRegister
+        {
+            get { return _addressRegister; }
+            set
+            {
+                _addressRegister = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private InputItem _wordRegister;
+        public InputItem WordRegister
+        {
+            get { return _wordRegister; }
+            set
+            {
+                _wordRegister = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private InputItem _addressAdder;
+        public InputItem AddressAdder
+        {
+            get { return _addressAdder; }
+            set
+            {
+                _addressAdder = value;
+                OnPropertyChanged();
+            }
+        }
         #region Commands
         public ICommand StartCommand { get; private set; }
         public ICommand StopCommand { get; private set; }
@@ -136,11 +175,15 @@ namespace ProcessorCommands.ViewModels
             return DataRegisters.Any(item => item.HasErrors)
                 || BaseRegisters.Any(e => e.HasErrors)
                 || IndexRegisters.Any(e => e.HasErrors)
+                || RAM.Any(e => e.HasErrors)
                 || CommandRegister.HasErrors
                 || AldFirstRegister.HasErrors
                 || AldSecondRegister.HasErrors
                 || ResultRegister.HasErrors
-                || CounterAddress.HasErrors;
+                || CounterAddress.HasErrors
+                || AddressRegister.HasErrors
+                || AddressAdder.HasErrors
+                || WordRegister.HasErrors;
         }
 
         private ObservableCollection<InputItem> _dataRegisters;
@@ -170,6 +213,16 @@ namespace ProcessorCommands.ViewModels
             private set
             {
                 _indexRegisters = value;
+            }
+        }
+        
+        private ObservableCollection<InputItem> _ram;
+        public ObservableCollection<InputItem> RAM
+        {
+            get => _ram;
+            private set
+            {
+                _ram = value;
             }
         }
     }

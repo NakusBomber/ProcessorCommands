@@ -61,6 +61,24 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Address adder.
+        /// </summary>
+        public static string AddressAdderDescription {
+            get {
+                return ResourceManager.GetString("AddressAdderDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Address register.
+        /// </summary>
+        public static string AddressRegisterDescription {
+            get {
+                return ResourceManager.GetString("AddressRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Base register.
         /// </summary>
         public static string BaseRegisterDescription {
@@ -88,6 +106,15 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на First register.
+        /// </summary>
+        public static string FirstRegisterDescription {
+            get {
+                return ResourceManager.GetString("FirstRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Index register.
         /// </summary>
         public static string IndexRegisterDescription {
@@ -97,11 +124,56 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Address.
+        /// </summary>
+        public static string RAMDescription {
+            get {
+                return ResourceManager.GetString("RAMDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Result register.
+        /// </summary>
+        public static string ResultRegisterDescription {
+            get {
+                return ResourceManager.GetString("ResultRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Second register.
+        /// </summary>
+        public static string SecondRegisterDescription {
+            get {
+                return ResourceManager.GetString("SecondRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Status.
+        /// </summary>
+        public static string StatusDescription {
+            get {
+                return ResourceManager.GetString("StatusDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Value.
         /// </summary>
         public static string ValueDescription {
             get {
                 return ResourceManager.GetString("ValueDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Word register.
+        /// </summary>
+        public static string WordRegisterDescription {
+            get {
+                return ResourceManager.GetString("WordRegisterDescription", resourceCulture);
             }
         }
     }

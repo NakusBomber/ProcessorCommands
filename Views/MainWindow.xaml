@@ -10,7 +10,7 @@
         xmlns:components="clr-namespace:ProcessorCommands.Components"
         mc:Ignorable="d"
         Title="Демонстрація виконання команди"
-        Height="575"
+        Height="650"
         Width="820">
     <Window.DataContext>
         <vm:MainViewModel />
@@ -76,7 +76,7 @@
                                       ImageSource="/Media/refresh.png"/>
         </ToolBar>
         <StackPanel Grid.Row="2">
-            <Grid>
+            <Grid Height="Auto">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="2*"/>
@@ -86,6 +86,7 @@
                 <GroupBox Header="Пристрій управління"
                           Grid.Column="0">
                     <StackPanel Margin="6">
+
                         <GroupBox Header="Регістр команди"
                                   DataContext="{Binding CommandRegister}">
                             <TextBlock Text="{Binding Value}"/>
@@ -109,11 +110,52 @@
                     </StackPanel>
                 </GroupBox>
 
-                <components:InputBox HeaderText="{x:Static resources:General.CounterAddressDescription}"
-                                     Grid.Column="1"
-                                     Item="{Binding DataContext.CounterAddress, RelativeSource={RelativeSource AncestorType=Window}}"
-                                     IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                <StackPanel Grid.Column="1">
+                    <components:InputBox HeaderText="{x:Static resources:General.CounterAddressDescription}"
+                                         Item="{Binding DataContext.CounterAddress, RelativeSource={RelativeSource AncestorType=Window}}"
+                                         IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"/>
 
+                    <GroupBox Header="{x:Static resources:General.AddressRegisterDescription}"
+                              DataContext="{Binding AddressRegister}">
+                        <TextBlock Text="{Binding Value}"/>
+                    </GroupBox>
+
+                    <GroupBox Header="{x:Static resources:General.AddressAdderDescription}"
+                              DataContext="{Binding AddressAdder}">
+                        <TextBlock Text="{Binding Value}"/>
+                    </GroupBox>
+
+                    <components:InputDataGrid ItemsSource="{Binding DataContext.RAM, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              Height="133"
+                                              IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              HeaderLabel="{x:Static resources:General.RAMDescription}"
+                                              HeaderValue="{x:Static resources:General.ValueDescription}"/>
+
+                    <GroupBox Header="{x:Static resources:General.WordRegisterDescription}"
+                              DataContext="{Binding WordRegister}">
+                        <TextBlock Text="{Binding Value}"/>
+                    </GroupBox>
+                </StackPanel>
+
+                <GroupBox Header="АЛП"
+                          Grid.Column="2">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <components:InputBox HeaderText="{x:Static resources:General.FirstRegisterDescription}"
+                                                 Item="{Binding DataContext.AldFirstRegister, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                 IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"/>
+
+                            <GroupBox Header="{x:Static resources:General.SecondRegisterDescription}"
+                                      DataContext="{Binding AldSecondRegister}">
+                                <TextBlock Text="{Binding Value}"/>
+                            </GroupBox>
+                        </StackPanel>
+                        <GroupBox Header="{x:Static resources:General.ResultRegisterDescription}"
+                                  DataContext="{Binding ResultRegister}">
+                            <TextBlock Text="{Binding Value}"/>
+                        </GroupBox>
+                    </StackPanel>
+                </GroupBox>
             </Grid>
         </StackPanel>
 
@@ -121,7 +163,7 @@
         <StatusBar Grid.Row="3">
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Статус:"
+                    <TextBlock Text="{Binding Source={x:Static resources:General.StatusDescription}, StringFormat='{}{0}:'}"
                                Margin="0,0,10,0"
                                FontWeight="Bold"/>
                     <TextBlock Text="{Binding StatusDescription}"/>

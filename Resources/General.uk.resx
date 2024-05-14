@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddressAdderDescription" xml:space="preserve">
+    <value>Суматор адреси</value>
+  </data>
+  <data name="AddressRegisterDescription" xml:space="preserve">
+    <value>Регістр адреси</value>
+  </data>
   <data name="BaseRegisterDescription" xml:space="preserve">
     <value>Регістр бази</value>
   </data>
@@ -126,10 +132,28 @@
   <data name="DataRegisterDescription" xml:space="preserve">
     <value>Регістр даних</value>
   </data>
+  <data name="FirstRegisterDescription" xml:space="preserve">
+    <value>Перший регістр</value>
+  </data>
   <data name="IndexRegisterDescription" xml:space="preserve">
     <value>Регістр індексу</value>
   </data>
+  <data name="RAMDescription" xml:space="preserve">
+    <value>Адреса</value>
+  </data>
+  <data name="ResultRegisterDescription" xml:space="preserve">
+    <value>Регістр результату</value>
+  </data>
+  <data name="SecondRegisterDescription" xml:space="preserve">
+    <value>Другий регістр</value>
+  </data>
+  <data name="StatusDescription" xml:space="preserve">
+    <value>Статус</value>
+  </data>
   <data name="ValueDescription" xml:space="preserve">
     <value>Значення</value>
+  </data>
+  <data name="WordRegisterDescription" xml:space="preserve">
+    <value>Регістр слова</value>
   </data>
 </root>
