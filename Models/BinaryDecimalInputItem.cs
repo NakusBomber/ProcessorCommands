@@ -9,7 +9,7 @@ namespace ProcessorCommands.Models
 {
     public class BinaryDecimalInputItem : InputItem
     {
-        public BinaryDecimalInputItem(string label, string value) : base(label, value)
+        public BinaryDecimalInputItem(string label = null, string value = null) : base(label, value)
         {
             Validation = new BinaryDecimalValidation();
         }

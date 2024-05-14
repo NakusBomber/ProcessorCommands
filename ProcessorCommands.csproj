@@ -84,6 +84,7 @@
     <Compile Include="Models\InputItem.cs" />
     <Compile Include="Models\ProgramStatus.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Models\StandartInputItem.cs" />
     <Compile Include="Resources\General.Designer.cs">
       <DependentUpon>General.resx</DependentUpon>
       <AutoGen>True</AutoGen>

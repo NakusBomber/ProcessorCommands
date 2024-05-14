@@ -9,7 +9,7 @@ namespace ProcessorCommands.Models
 {
     public class HexadecimalInputItem : InputItem
     {
-        public HexadecimalInputItem(string label, string value) : base(label, value)
+        public HexadecimalInputItem(string label = null, string value = null) : base(label, value)
         {
             Validation = new HexadecimalValidation();
         }

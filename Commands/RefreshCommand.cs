@@ -29,10 +29,20 @@ namespace ProcessorCommands.Commands
         }
         public override void Execute(object parameter)
         {
+            var e = string.Empty;
             foreach (var register in _vm.DataRegisters)
-            {
-                register.Value = string.Empty;
-            }
+                register.Value = e;
+
+            foreach (var reg in _vm.BaseRegisters)
+                reg.Value = e;
+
+            foreach (var reg in _vm.IndexRegisters)
+                reg.Value = e;
+
+            _vm.CommandRegister.Value = e;
+            _vm.AldFirstRegister.Value = e;
+            _vm.AldSecondRegister.Value = e;
+            _vm.ResultRegister.Value = e;
         }
     }
 }

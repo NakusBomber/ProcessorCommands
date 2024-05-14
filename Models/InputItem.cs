@@ -16,8 +16,8 @@ namespace ProcessorCommands.Models
         private readonly Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
         public InputItem(string label, string value)
         {
-            this.Label = label;
-            this.Value = value;
+            this.Label = label ?? "";
+            this.Value = value ?? "";
         }
 
         public string Label { get; set; }

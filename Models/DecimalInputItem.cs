@@ -10,7 +10,7 @@ namespace ProcessorCommands.Models
 {
     public class DecimalInputItem : InputItem
     {
-        public DecimalInputItem(string label, string value) : base(label, value)
+        public DecimalInputItem(string label = null, string value = null) : base(label, value)
         {
             Validation = new DecimalValidation();
         }

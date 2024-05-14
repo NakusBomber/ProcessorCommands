@@ -61,11 +61,38 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Base register.
+        /// </summary>
+        public static string BaseRegisterDescription {
+            get {
+                return ResourceManager.GetString("BaseRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Data register.
         /// </summary>
         public static string DataRegisterDescription {
             get {
                 return ResourceManager.GetString("DataRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Index register.
+        /// </summary>
+        public static string IndexRegisterDescription {
+            get {
+                return ResourceManager.GetString("IndexRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Value.
+        /// </summary>
+        public static string ValueDescription {
+            get {
+                return ResourceManager.GetString("ValueDescription", resourceCulture);
             }
         }
     }

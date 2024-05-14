@@ -26,11 +26,26 @@ namespace ProcessorCommands.ViewModels
 			RefreshCommand = new RefreshCommand(this);
 			ChangeLanguageCommand = new ChangeLanguageCommand();
 
-			CommandRegister = new HexadecimalInputItem("", "");
+			CommandRegister = new StandartInputItem();
+            AldFirstRegister = new DecimalInputItem();
+            AldSecondRegister = new StandartInputItem();
+            ResultRegister = new StandartInputItem();
+            CounterAddress = new HexadecimalInputItem();
+
 			DataRegisters = new ObservableCollection<InputItem>();
             for (int i = 0; i < 8; i++)
             {
-				DataRegisters.Add(new DecimalInputItem($"{i+1}", ""));
+				DataRegisters.Add(new DecimalInputItem($"{i + 1}"));
+            }
+            BaseRegisters = new ObservableCollection<InputItem>();
+            for (int i = 0; i < 4; i++)
+            {
+                BaseRegisters.Add(new HexadecimalInputItem($"{i + 1}"));
+            }
+            IndexRegisters = new ObservableCollection<InputItem>();
+            for (int i = 0; i < 2; i++)
+            {
+                IndexRegisters.Add(new DecimalInputItem($"{i + 1}"));
             }
 
         }
@@ -48,9 +63,8 @@ namespace ProcessorCommands.ViewModels
 			}
 		}
 
-		private HexadecimalInputItem _commandRegister;
-
-		public HexadecimalInputItem CommandRegister
+		private InputItem _commandRegister;
+		public InputItem CommandRegister
 		{
 			get { return _commandRegister; }
 			set
@@ -60,9 +74,52 @@ namespace ProcessorCommands.ViewModels
 			}
 		}
 
+		private InputItem _aldFirstRegister;
+		public InputItem AldFirstRegister
+        {
+			get { return _aldFirstRegister; }
+			set
+			{
+				_aldFirstRegister = value;
+				OnPropertyChanged();
+			}
+		}
 
-		#region Commands
-		public ICommand StartCommand { get; private set; }
+        private InputItem _aldSecondRegister;
+        public InputItem AldSecondRegister
+        {
+            get { return _aldSecondRegister; }
+            set
+            {
+                _aldSecondRegister = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private InputItem _resultRegister;
+        public InputItem ResultRegister
+        {
+            get { return _resultRegister; }
+            set
+            {
+                _resultRegister = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        private InputItem _counterAddress;
+        public InputItem CounterAddress
+        {
+            get { return _counterAddress; }
+            set
+            {
+                _counterAddress = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #region Commands
+        public ICommand StartCommand { get; private set; }
         public ICommand StopCommand { get; private set; }
 		public ICommand StepCommand { get; private set; }
         public ICommand RefreshCommand { get; private set; }
@@ -72,7 +129,19 @@ namespace ProcessorCommands.ViewModels
 
         public string StatusDescription => Status.GetDescription();
         public bool IsBlockInput => (Status != ProgramStatus.Nothing && Status != ProgramStatus.Stop);
-        public bool HasError => DataRegisters.Any(item => item.HasErrors) || CommandRegister.HasErrors;
+        public bool HasError =>  isErrorVM();
+
+        private bool isErrorVM()
+        {
+            return DataRegisters.Any(item => item.HasErrors)
+                || BaseRegisters.Any(e => e.HasErrors)
+                || IndexRegisters.Any(e => e.HasErrors)
+                || CommandRegister.HasErrors
+                || AldFirstRegister.HasErrors
+                || AldSecondRegister.HasErrors
+                || ResultRegister.HasErrors
+                || CounterAddress.HasErrors;
+        }
 
         private ObservableCollection<InputItem> _dataRegisters;
         public ObservableCollection<InputItem> DataRegisters
@@ -84,5 +153,24 @@ namespace ProcessorCommands.ViewModels
 			}
 		}
 
+        private ObservableCollection<InputItem> _baseRegisters;
+        public ObservableCollection<InputItem> BaseRegisters
+        {
+            get => _baseRegisters;
+            private set
+            {
+                _baseRegisters = value;
+            }
+        }
+
+        private ObservableCollection<InputItem> _indexRegisters;
+        public ObservableCollection<InputItem> IndexRegisters
+        {
+            get => _indexRegisters;
+            private set
+            {
+                _indexRegisters = value;
+            }
+        }
     }
 }

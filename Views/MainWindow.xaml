@@ -88,26 +88,38 @@
                 <GroupBox Header="Пристрій управління"
                           Grid.Column="0">
                     <StackPanel Margin="6">
-
                         <GroupBox Header="Регістр команди"
-                                  DataContext="{Binding CommandRegister}"
-                                  Style="{StaticResource GroupBoxStyle}">
-                            <GroupBox.Content>
-                                <TextBox Text="{Binding Value,
-                                         Mode=TwoWay,
-                                         ValidatesOnDataErrors=True,
-                                         NotifyOnValidationError=True,
-                                         UpdateSourceTrigger=PropertyChanged}"
-                                         IsReadOnly="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
-                                         Style="{StaticResource ItemInputErrorStyle}"/>
-                            </GroupBox.Content>
+                                  DataContext="{Binding CommandRegister}">
+                            <TextBlock Text="{Binding Value}"/>
                         </GroupBox>
+
 
                         <components:InputDataGrid ItemsSource="{Binding DataContext.DataRegisters, RelativeSource={RelativeSource AncestorType=Window}}"
                                                   IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
                                                   HeaderLabel="{x:Static resources:General.DataRegisterDescription}"
-                                                  HeaderValue="Значення"/>
+                                                  HeaderValue="{x:Static resources:General.ValueDescription}"/>
+
+                        <components:InputDataGrid ItemsSource="{Binding DataContext.BaseRegisters, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                  IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                  HeaderLabel="{x:Static resources:General.BaseRegisterDescription}"
+                                                  HeaderValue="{x:Static resources:General.ValueDescription}"/>
+
+                        <components:InputDataGrid ItemsSource="{Binding DataContext.IndexRegisters, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                  IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                  HeaderLabel="{x:Static resources:General.IndexRegisterDescription}"
+                                                  HeaderValue="{x:Static resources:General.ValueDescription}"/>
                     </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Лічильник адресу команди"
+                          Grid.Column="1"
+                          DataContext="{Binding CommandRegister}"
+                          Style="{StaticResource GroupBoxStyle}">
+                    <GroupBox.Content>
+                        <TextBox Text="{Binding Value, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
+                                 IsReadOnly="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
+                                 Style="{StaticResource ItemInputErrorStyle}"/>
+                    </GroupBox.Content>
                 </GroupBox>
             </Grid>
         </StackPanel>

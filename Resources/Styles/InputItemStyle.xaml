@@ -6,7 +6,7 @@
 
     <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource DataGridBaseStyle}">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding HasErrors}" Value="True">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasErrors, TargetNullValue=False}" Value="True">
                 <Setter Property="BorderBrush" Value="Red"/>
                 <Setter Property="BorderThickness" Value="1"/>
             </DataTrigger>
