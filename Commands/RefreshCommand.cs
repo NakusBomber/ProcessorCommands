@@ -43,6 +43,7 @@ namespace ProcessorCommands.Commands
             _vm.AldFirstRegister.Value = e;
             _vm.AldSecondRegister.Value = e;
             _vm.ResultRegister.Value = e;
+            _vm.CounterAddress.Value = e;
         }
     }
 }

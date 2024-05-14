@@ -120,6 +120,9 @@
   <data name="BaseRegisterDescription" xml:space="preserve">
     <value>Регістр бази</value>
   </data>
+  <data name="CounterAddressDescription" xml:space="preserve">
+    <value>Лічильник адреси команди</value>
+  </data>
   <data name="DataRegisterDescription" xml:space="preserve">
     <value>Регістр даних</value>
   </data>

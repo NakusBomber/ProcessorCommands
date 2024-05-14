@@ -120,6 +120,9 @@
   <data name="BaseRegisterDescription" xml:space="preserve">
     <value>Base register</value>
   </data>
+  <data name="CounterAddressDescription" xml:space="preserve">
+    <value>Counter command's address</value>
+  </data>
   <data name="DataRegisterDescription" xml:space="preserve">
     <value>Data register</value>
   </data>

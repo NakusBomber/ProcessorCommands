@@ -19,8 +19,6 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Resources/Styles/DataGridStyle.xaml"/>
-                <ResourceDictionary Source="../Resources/Styles/InputItemStyle.xaml"/>
                 <ResourceDictionary Source="../Resources/Styles/ToolBarStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -111,16 +109,11 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Header="Лічильник адресу команди"
-                          Grid.Column="1"
-                          DataContext="{Binding CommandRegister}"
-                          Style="{StaticResource GroupBoxStyle}">
-                    <GroupBox.Content>
-                        <TextBox Text="{Binding Value, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                                 IsReadOnly="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
-                                 Style="{StaticResource ItemInputErrorStyle}"/>
-                    </GroupBox.Content>
-                </GroupBox>
+                <components:InputBox HeaderText="{x:Static resources:General.CounterAddressDescription}"
+                                     Grid.Column="1"
+                                     Item="{Binding DataContext.CounterAddress, RelativeSource={RelativeSource AncestorType=Window}}"
+                                     IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"/>
+
             </Grid>
         </StackPanel>
 

@@ -70,6 +70,15 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Counter command&apos;s address.
+        /// </summary>
+        public static string CounterAddressDescription {
+            get {
+                return ResourceManager.GetString("CounterAddressDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Data register.
         /// </summary>
         public static string DataRegisterDescription {
