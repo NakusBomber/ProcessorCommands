@@ -10,8 +10,9 @@
         xmlns:components="clr-namespace:ProcessorCommands.Components"
         mc:Ignorable="d"
         Title="{x:Static resources:General.MainWindowTitle}"
+        ResizeMode="CanMinimize"
         Height="650"
-        Width="820">
+        Width="900">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
@@ -51,6 +52,7 @@
                 <MenuItem Header="{x:Static resources:General.About}"/>
             </MenuItem>
         </Menu>
+
         <Border Grid.Row="1"
                 BorderBrush="LightGray"
                 BorderThickness="1"
@@ -80,81 +82,104 @@
             </ToolBar>
         </Border>
 
-        <StackPanel Grid.Row="2">
-            <Grid Height="Auto">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="2"
+              Height="Auto"
+              Margin="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                <GroupBox Header="{x:Static resources:General.ControlDevice}"
-                          Grid.Column="0">
-                    <StackPanel Margin="6">
+            <GroupBox Header="{x:Static resources:General.ControlDevice}"
+                      Margin="0,0,10,0"
+                      Grid.Column="0">
+                <StackPanel Margin="6">
 
-                        <GroupBox Header="{x:Static resources:General.CommandRegisterDescription}"
-                                  DataContext="{Binding CommandRegister}">
-                            <TextBlock Text="{Binding Value}"/>
-                        </GroupBox>
+                    <GroupBox Header="{x:Static resources:General.CommandRegisterDescription}"
+                              Margin="0,0,0,6"
+                              DataContext="{Binding CommandRegister}">
+                        <TextBlock Text="{Binding Value}"/>
+                    </GroupBox>
 
 
-                        <components:InputDataGrid ItemsSource="{Binding DataContext.DataRegisters, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                  IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                  HeaderLabel="{x:Static resources:General.DataRegisterDescription}"
-                                                  HeaderValue="{x:Static resources:General.ValueDescription}"/>
+                    <components:InputDataGrid ItemsSource="{Binding DataContext.DataRegisters, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              HeaderLabel="{x:Static resources:General.DataRegisterDescription}"
+                                              HeaderValue="{x:Static resources:General.ValueDescription}"/>
 
-                        <components:InputDataGrid ItemsSource="{Binding DataContext.BaseRegisters, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                  IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                  HeaderLabel="{x:Static resources:General.BaseRegisterDescription}"
-                                                  HeaderValue="{x:Static resources:General.ValueDescription}"/>
+                    <components:InputDataGrid ItemsSource="{Binding DataContext.BaseRegisters, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              HeaderLabel="{x:Static resources:General.BaseRegisterDescription}"
+                                              HeaderValue="{x:Static resources:General.ValueDescription}"/>
 
-                        <components:InputDataGrid ItemsSource="{Binding DataContext.IndexRegisters, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                  IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                  HeaderLabel="{x:Static resources:General.IndexRegisterDescription}"
-                                                  HeaderValue="{x:Static resources:General.ValueDescription}"/>
-                    </StackPanel>
-                </GroupBox>
+                    <components:InputDataGrid ItemsSource="{Binding DataContext.IndexRegisters, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              HeaderLabel="{x:Static resources:General.IndexRegisterDescription}"
+                                              HeaderValue="{x:Static resources:General.ValueDescription}"/>
+                </StackPanel>
+            </GroupBox>
 
-                <StackPanel Grid.Column="1">
+            <Grid Grid.Column="1"
+                  Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="2*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0"
+                            Height="Auto">
                     <components:InputBox HeaderText="{x:Static resources:General.CounterAddressDescription}"
+                                         Margin="0,0,0,6"
                                          Item="{Binding DataContext.CounterAddress, RelativeSource={RelativeSource AncestorType=Window}}"
                                          IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"/>
 
                     <GroupBox Header="{x:Static resources:General.AddressRegisterDescription}"
+                              Margin="0,0,0,6"
                               DataContext="{Binding AddressRegister}">
                         <TextBlock Text="{Binding Value}"/>
                     </GroupBox>
 
                     <GroupBox Header="{x:Static resources:General.AddressAdderDescription}"
+                              Margin="0,0,0,6"
                               DataContext="{Binding AddressAdder}">
                         <TextBlock Text="{Binding Value}"/>
                     </GroupBox>
 
                     <components:InputDataGrid ItemsSource="{Binding DataContext.RAM, RelativeSource={RelativeSource AncestorType=Window}}"
-                                              Height="133"
+                                              Height="139"
+                                              Margin="0,0,0,6"
                                               IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"
                                               HeaderLabel="{x:Static resources:General.RAMDescription}"
                                               HeaderValue="{x:Static resources:General.ValueDescription}"/>
 
                     <GroupBox Header="{x:Static resources:General.WordRegisterDescription}"
+                              Margin="0,0,0,6"
                               DataContext="{Binding WordRegister}">
                         <TextBlock Text="{Binding Value}"/>
                     </GroupBox>
                 </StackPanel>
 
                 <GroupBox Header="{x:Static resources:General.ALU}"
-                          Grid.Column="2">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                          Grid.Row="1">
+                    <StackPanel Margin="6">
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="0.05*"/>
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+
                             <components:InputBox HeaderText="{x:Static resources:General.FirstRegisterDescription}"
+                                                 Grid.Column="0"
                                                  Item="{Binding DataContext.AluFirstRegister, RelativeSource={RelativeSource AncestorType=Window}}"
                                                  IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"/>
 
                             <GroupBox Header="{x:Static resources:General.SecondRegisterDescription}"
+                                      Grid.Column="2"
                                       DataContext="{Binding AluSecondRegister}">
                                 <TextBlock Text="{Binding Value}"/>
                             </GroupBox>
-                        </StackPanel>
+                        </Grid>
                         <GroupBox Header="{x:Static resources:General.ResultRegisterDescription}"
                                   DataContext="{Binding ResultRegister}">
                             <TextBlock Text="{Binding Value}"/>
@@ -162,14 +187,14 @@
                     </StackPanel>
                 </GroupBox>
             </Grid>
-        </StackPanel>
 
+        </Grid>
 
         <StatusBar Grid.Row="3">
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding Source={x:Static resources:General.StatusDescription}, StringFormat='{}{0}:'}"
-                               Margin="0,0,10,0"
+                               Margin="10,0,10,0"
                                FontWeight="Bold"/>
                     <TextBlock Text="{Binding StatusDescription}"/>
                 </StackPanel>

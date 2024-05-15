@@ -166,6 +166,7 @@ namespace ProcessorCommands.ViewModels
                 OnPropertyChanged();
             }
         }
+
         #region Commands
         public ICommand StartCommand { get; private set; }
         public ICommand StopCommand { get; private set; }

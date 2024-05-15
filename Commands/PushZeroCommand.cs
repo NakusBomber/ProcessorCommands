@@ -33,6 +33,7 @@ namespace ProcessorCommands.Commands
                 value += "0";
 
             tb.Text = value;
+            tb.CaretIndex = value.Length;
         }
     }
 }
