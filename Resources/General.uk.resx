@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Про додаток</value>
+  </data>
   <data name="AddressAdderDescription" xml:space="preserve">
     <value>Суматор адреси</value>
   </data>
@@ -128,6 +131,12 @@
   </data>
   <data name="BaseRegisterDescription" xml:space="preserve">
     <value>Регістр бази</value>
+  </data>
+  <data name="CommandRegisterDescription" xml:space="preserve">
+    <value>Регістр команди</value>
+  </data>
+  <data name="ControlDevice" xml:space="preserve">
+    <value>Пристрій управління</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Скопіювати</value>
@@ -141,11 +150,23 @@
   <data name="DataRegisterDescription" xml:space="preserve">
     <value>Регістр даних</value>
   </data>
+  <data name="English" xml:space="preserve">
+    <value>Англійська</value>
+  </data>
   <data name="FirstRegisterDescription" xml:space="preserve">
     <value>Перший регістр</value>
   </data>
   <data name="IndexRegisterDescription" xml:space="preserve">
     <value>Регістр індексу</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Інформація</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Мова</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>Демонстрація виконання команди</value>
   </data>
   <data name="Paste" xml:space="preserve">
     <value>Вставити</value>
@@ -156,14 +177,35 @@
   <data name="RAMDescription" xml:space="preserve">
     <value>Адреса</value>
   </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Довідка</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Очистити</value>
+  </data>
   <data name="ResultRegisterDescription" xml:space="preserve">
     <value>Регістр результату</value>
   </data>
   <data name="SecondRegisterDescription" xml:space="preserve">
     <value>Другий регістр</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Налаштування</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Старт</value>
+  </data>
   <data name="StatusDescription" xml:space="preserve">
     <value>Статус</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Крок</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Стоп</value>
+  </data>
+  <data name="Ukrainian" xml:space="preserve">
+    <value>Українська</value>
   </data>
   <data name="ValueDescription" xml:space="preserve">
     <value>Значення</value>

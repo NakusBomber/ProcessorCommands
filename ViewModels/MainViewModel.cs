@@ -16,17 +16,26 @@ namespace ProcessorCommands.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-
+        private StandartProcessor processor = new Intel8080Model(); 
 		public MainViewModel()
 		{
 			Status = ProgramStatus.Nothing;
-			StartCommand = new StartCommand(this);
-			StopCommand = new StopCommand(this);
-			StepCommand = new StepCommand(this);
-			RefreshCommand = new RefreshCommand(this);
-			ChangeLanguageCommand = new ChangeLanguageCommand();
+			CreateCommands();
+            CreateRegisters();
+        }
 
-			CommandRegister = new StandartInputItem();
+        private void CreateCommands()
+        {
+            StartCommand = new StartCommand(this);
+            StopCommand = new StopCommand(this);
+            StepCommand = new StepCommand(this);
+            RefreshCommand = new RefreshCommand(this);
+            ChangeLanguageCommand = new ChangeLanguageCommand();
+        }
+
+        private void CreateRegisters()
+        {
+            CommandRegister = new StandartInputItem();
             AluFirstRegister = new DecimalInputItem();
             AluSecondRegister = new StandartInputItem();
             ResultRegister = new StandartInputItem();
@@ -35,23 +44,23 @@ namespace ProcessorCommands.ViewModels
             WordRegister = new BinaryDecimalInputItem();
             AddressAdder = new HexadecimalInputItem();
 
-			DataRegisters = new ObservableCollection<InputItem>();
-            for (int i = 0; i < 8; i++)
+            DataRegisters = new ObservableCollection<InputItem>();
+            for (int i = 0; i < processor.CountDataRegisters; i++)
             {
-				DataRegisters.Add(new DecimalInputItem($"{i + 1}"));
+                DataRegisters.Add(new DecimalInputItem($"{i + 1}"));
             }
             BaseRegisters = new ObservableCollection<InputItem>();
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < processor.CountBaseRegisters; i++)
             {
                 BaseRegisters.Add(new HexadecimalInputItem($"{i + 1}"));
             }
             IndexRegisters = new ObservableCollection<InputItem>();
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < processor.CountIndexRegisters; i++)
             {
                 IndexRegisters.Add(new DecimalInputItem($"{i + 1}"));
             }
             RAM = new ObservableCollection<InputItem>();
-            for (int i = 0; i <= 0xFF; i++)
+            for (int i = 0; i < processor.SizeRAM; i++)
             {
                 RAM.Add(new BinaryDecimalInputItem($"{i:X2}"));
             }

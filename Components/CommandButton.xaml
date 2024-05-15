@@ -9,16 +9,18 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/Styles/ImageStyle.xaml" />
-                <ResourceDictionary Source="../Resources/Styles/CommandButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <Button Command="{Binding Command}"
-            Style="{StaticResource ButtonStyle}"
-            BorderThickness="0"
-            BorderBrush="Transparent"
-            Background="Transparent"
             Padding="2,0">
+        <Button.Style>
+            <Style TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+        </Button.Style>
         <StackPanel Orientation="Vertical"
                     Background="Transparent"
                     Margin="0,0,2,0">

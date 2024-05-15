@@ -86,6 +86,8 @@
     <Compile Include="Models\DecimalInputItem.cs" />
     <Compile Include="Models\HexadecimalInputItem.cs" />
     <Compile Include="Models\InputItem.cs" />
+    <Compile Include="Models\Intel8080Model.cs" />
+    <Compile Include="Models\StandartProcessor.cs" />
     <Compile Include="Models\ProgramStatus.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Models\StandartInputItem.cs" />
@@ -116,10 +118,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\InputDataGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Styles\CommandButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

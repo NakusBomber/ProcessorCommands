@@ -61,6 +61,15 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на About.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Address adder.
         /// </summary>
         public static string AddressAdderDescription {
@@ -93,6 +102,24 @@ namespace ProcessorCommands.Resources {
         public static string BaseRegisterDescription {
             get {
                 return ResourceManager.GetString("BaseRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Command register.
+        /// </summary>
+        public static string CommandRegisterDescription {
+            get {
+                return ResourceManager.GetString("CommandRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Control device.
+        /// </summary>
+        public static string ControlDevice {
+            get {
+                return ResourceManager.GetString("ControlDevice", resourceCulture);
             }
         }
         
@@ -133,6 +160,15 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на English.
+        /// </summary>
+        public static string English {
+            get {
+                return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на First register.
         /// </summary>
         public static string FirstRegisterDescription {
@@ -147,6 +183,33 @@ namespace ProcessorCommands.Resources {
         public static string IndexRegisterDescription {
             get {
                 return ResourceManager.GetString("IndexRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Information.
+        /// </summary>
+        public static string Info {
+            get {
+                return ResourceManager.GetString("Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Demonstration of command execution.
+        /// </summary>
+        public static string MainWindowTitle {
+            get {
+                return ResourceManager.GetString("MainWindowTitle", resourceCulture);
             }
         }
         
@@ -178,6 +241,24 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Reference.
+        /// </summary>
+        public static string Reference {
+            get {
+                return ResourceManager.GetString("Reference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Refresh.
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Result register.
         /// </summary>
         public static string ResultRegisterDescription {
@@ -196,11 +277,56 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Start.
+        /// </summary>
+        public static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Status.
         /// </summary>
         public static string StatusDescription {
             get {
                 return ResourceManager.GetString("StatusDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Step.
+        /// </summary>
+        public static string Step {
+            get {
+                return ResourceManager.GetString("Step", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Stop.
+        /// </summary>
+        public static string Stop {
+            get {
+                return ResourceManager.GetString("Stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ukrainian.
+        /// </summary>
+        public static string Ukrainian {
+            get {
+                return ResourceManager.GetString("Ukrainian", resourceCulture);
             }
         }
         

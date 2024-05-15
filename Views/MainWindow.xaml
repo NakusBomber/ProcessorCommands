@@ -9,7 +9,7 @@
         xmlns:vm="clr-namespace:ProcessorCommands.ViewModels"
         xmlns:components="clr-namespace:ProcessorCommands.Components"
         mc:Ignorable="d"
-        Title="Демонстрація виконання команди"
+        Title="{x:Static resources:General.MainWindowTitle}"
         Height="650"
         Width="820">
     <Window.DataContext>
@@ -34,21 +34,21 @@
 
         <Menu Grid.Row="0"
               Padding="3">
-            <MenuItem Header="Налаштування">
-                <MenuItem Header="Мова">
-                    <MenuItem Header="Англійська"
+            <MenuItem Header="{x:Static resources:General.Settings}">
+                <MenuItem Header="{x:Static resources:General.Language}">
+                    <MenuItem Header="{x:Static resources:General.English}"
                               Command="{Binding ChangeLanguageCommand}"
                               CommandParameter="en-US"
                               />
-                    <MenuItem Header="Українська"
+                    <MenuItem Header="{x:Static resources:General.Ukrainian}"
                               Command="{Binding ChangeLanguageCommand}"
                               CommandParameter="uk-UA"
                               />
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Інформація">
-                <MenuItem Header="Довідка"/>
-                <MenuItem Header="Про додаток"/>
+            <MenuItem Header="{x:Static resources:General.Info}">
+                <MenuItem Header="{x:Static resources:General.Reference}"/>
+                <MenuItem Header="{x:Static resources:General.About}"/>
             </MenuItem>
         </Menu>
         <Border Grid.Row="1"
@@ -62,19 +62,19 @@
                      UseLayoutRounding="False">
 
 
-                <components:CommandButton Text="Cтарт"
+                <components:CommandButton Text="{x:Static resources:General.Start}"
                                           Command="{Binding DataContext.StartCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                           ImageSource="/Media/start.png"/>
 
-                <components:CommandButton Text="Cтоп"
+                <components:CommandButton Text="{x:Static resources:General.Stop}"
                                           Command="{Binding DataContext.StopCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                           ImageSource="/Media/stop.png"/>
 
-                <components:CommandButton Text="Крок"
+                <components:CommandButton Text="{x:Static resources:General.Step}"
                                           Command="{Binding DataContext.StepCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                           ImageSource="/Media/step.png"/>
 
-                <components:CommandButton Text="Очистити"
+                <components:CommandButton Text="{x:Static resources:General.Refresh}"
                                           Command="{Binding DataContext.RefreshCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                           ImageSource="/Media/refresh.png"/>
             </ToolBar>
@@ -88,11 +88,11 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <GroupBox Header="Пристрій управління"
+                <GroupBox Header="{x:Static resources:General.ControlDevice}"
                           Grid.Column="0">
                     <StackPanel Margin="6">
 
-                        <GroupBox Header="Регістр команди"
+                        <GroupBox Header="{x:Static resources:General.CommandRegisterDescription}"
                                   DataContext="{Binding CommandRegister}">
                             <TextBlock Text="{Binding Value}"/>
                         </GroupBox>
@@ -142,7 +142,7 @@
                     </GroupBox>
                 </StackPanel>
 
-                <GroupBox Header="АЛП"
+                <GroupBox Header="{x:Static resources:General.ALU}"
                           Grid.Column="2">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
