@@ -2,21 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="ToolBarButtonHover" Color="#210080FF"/>
-    <SolidColorBrush x:Key="ToolBarMenuBorder" Color="#FFB6BDC5"/>
-    <SolidColorBrush x:Key="ToolBarSubMenuBackground" Color="#FFEEF5FD"/>
-    <SolidColorBrush x:Key="ToolBarHorizontalBackground" Color="#FFEEF5FD"/>
-    <SolidColorBrush x:Key="ToolBarVerticalBackground" Color="#FFEEF5FD"/>
-    <SolidColorBrush x:Key="ToolBarGripper" Color="#FF6D6D6D"/>
-    <SolidColorBrush x:Key="ToolBarToggleButtonHorizontalBackground" Color="#FFEEF5FD"/>
-    <SolidColorBrush x:Key="ToolBarToggleButtonVerticalBackground" Color="#FFEEF5FD"/>
+    <SolidColorBrush x:Key="ToolBarMenuBorder" Color="Transparent"/>
+    <SolidColorBrush x:Key="ToolBarSubMenuBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="ToolBarHorizontalBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="ToolBarVerticalBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="ToolBarGripper" Color="Transparent"/>
+    <SolidColorBrush x:Key="ToolBarToggleButtonHorizontalBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="ToolBarToggleButtonVerticalBackground" Color="Transparent"/>
     <Style x:Key="ToolBarMainPanelBorderStyle" TargetType="{x:Type Border}">
         <Setter Property="Margin" Value="0,0,0,0"/>
         <Setter Property="CornerRadius" Value="3,3,3,3"/>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="true">
-                <Setter Property="CornerRadius" Value="0,0,0,0"/>
-            </DataTrigger>
-        </Style.Triggers>
     </Style>
     <Style x:Key="ToolBarThumbStyle" TargetType="{x:Type Thumb}">
         <Setter Property="Template">
@@ -160,17 +155,9 @@
                             <Setter Property="Margin" TargetName="MainPanelBorder" Value="0,0,0,11"/>
                             <Setter Property="Background" Value="{StaticResource ToolBarVerticalBackground}"/>
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="true">
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
-            </DataTrigger>
-        </Style.Triggers>
     </Style>
 </ResourceDictionary>

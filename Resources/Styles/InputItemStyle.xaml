@@ -3,9 +3,11 @@
                     xmlns:components="clr-namespace:ProcessorCommands.Components">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="DataGridStyle.xaml"/>
+        <ResourceDictionary Source="../../Components/ContextMenu.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource DataGridBaseStyle}">
+        <Setter Property="BorderBrush" Value="Blue"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=components:InputBox}, Path=Item.HasErrors, TargetNullValue=False}" Value="True">
                 <Setter Property="BorderBrush" Value="Red"/>
@@ -18,5 +20,6 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        <Setter Property="ContextMenu" Value="{StaticResource DefaultContextMenu}"/>
     </Style>
 </ResourceDictionary>

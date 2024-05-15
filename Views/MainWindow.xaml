@@ -38,11 +38,11 @@
                 <MenuItem Header="Мова">
                     <MenuItem Header="Англійська"
                               Command="{Binding ChangeLanguageCommand}"
-                              CommandParameter="en"
+                              CommandParameter="en-US"
                               />
                     <MenuItem Header="Українська"
                               Command="{Binding ChangeLanguageCommand}"
-                              CommandParameter="uk"
+                              CommandParameter="uk-UA"
                               />
                 </MenuItem>
             </MenuItem>
@@ -51,30 +51,35 @@
                 <MenuItem Header="Про додаток"/>
             </MenuItem>
         </Menu>
+        <Border Grid.Row="1"
+                BorderBrush="LightGray"
+                BorderThickness="1"
+                CornerRadius="2"
+                Margin="4">
+            <ToolBar Style="{StaticResource ToolBarStyle1}"
+                     Height="Auto"
+                     ToolBarTray.IsLocked="True"
+                     UseLayoutRounding="False">
 
-        <ToolBar Style="{StaticResource ToolBarStyle1}"
-                 Grid.Row="1"
-                 Height="Auto"
-                 ToolBarTray.IsLocked="True"
-                 UseLayoutRounding="False">
 
+                <components:CommandButton Text="Cтарт"
+                                          Command="{Binding DataContext.StartCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          ImageSource="/Media/start.png"/>
 
-            <components:CommandButton Text="Cтарт"
-                                      Command="{Binding DataContext.StartCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                      ImageSource="/Media/start.png"/>
+                <components:CommandButton Text="Cтоп"
+                                          Command="{Binding DataContext.StopCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          ImageSource="/Media/stop.png"/>
 
-            <components:CommandButton Text="Cтоп"
-                                      Command="{Binding DataContext.StopCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                      ImageSource="/Media/stop.png"/>
+                <components:CommandButton Text="Крок"
+                                          Command="{Binding DataContext.StepCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          ImageSource="/Media/step.png"/>
 
-            <components:CommandButton Text="Крок"
-                                      Command="{Binding DataContext.StepCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                      ImageSource="/Media/step.png"/>
+                <components:CommandButton Text="Очистити"
+                                          Command="{Binding DataContext.RefreshCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          ImageSource="/Media/refresh.png"/>
+            </ToolBar>
+        </Border>
 
-            <components:CommandButton Text="Очистити"
-                                      Command="{Binding DataContext.RefreshCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                      ImageSource="/Media/refresh.png"/>
-        </ToolBar>
         <StackPanel Grid.Row="2">
             <Grid Height="Auto">
                 <Grid.ColumnDefinitions>
@@ -142,11 +147,11 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <components:InputBox HeaderText="{x:Static resources:General.FirstRegisterDescription}"
-                                                 Item="{Binding DataContext.AldFirstRegister, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                 Item="{Binding DataContext.AluFirstRegister, RelativeSource={RelativeSource AncestorType=Window}}"
                                                  IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"/>
 
                             <GroupBox Header="{x:Static resources:General.SecondRegisterDescription}"
-                                      DataContext="{Binding AldSecondRegister}">
+                                      DataContext="{Binding AluSecondRegister}">
                                 <TextBlock Text="{Binding Value}"/>
                             </GroupBox>
                         </StackPanel>

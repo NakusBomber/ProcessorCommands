@@ -51,7 +51,7 @@ namespace ProcessorCommands.Helpers
                 if (Properties.Settings.Default.LanguageApp != null)
                     return Properties.Settings.Default.LanguageApp;
 
-                return "en";
+                return "en-US";
             }
             private set
             {

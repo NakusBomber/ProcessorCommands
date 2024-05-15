@@ -39,11 +39,17 @@ namespace ProcessorCommands.Commands
             foreach (var reg in _vm.IndexRegisters)
                 reg.Value = e;
 
+            foreach (var item in _vm.RAM)
+                item.Value = e;
+
             _vm.CommandRegister.Value = e;
-            _vm.AldFirstRegister.Value = e;
-            _vm.AldSecondRegister.Value = e;
+            _vm.AluFirstRegister.Value = e;
+            _vm.AluSecondRegister.Value = e;
             _vm.ResultRegister.Value = e;
             _vm.CounterAddress.Value = e;
+            _vm.AddressAdder.Value = e;
+            _vm.AddressRegister.Value = e;
+            _vm.WordRegister.Value = e;
         }
     }
 }

@@ -79,6 +79,15 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Arithmetic logic unit.
+        /// </summary>
+        public static string ALU {
+            get {
+                return ResourceManager.GetString("ALU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Base register.
         /// </summary>
         public static string BaseRegisterDescription {
@@ -88,11 +97,29 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Copy.
+        /// </summary>
+        public static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Counter command&apos;s address.
         /// </summary>
         public static string CounterAddressDescription {
             get {
                 return ResourceManager.GetString("CounterAddressDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Cut.
+        /// </summary>
+        public static string Cut {
+            get {
+                return ResourceManager.GetString("Cut", resourceCulture);
             }
         }
         
@@ -120,6 +147,24 @@ namespace ProcessorCommands.Resources {
         public static string IndexRegisterDescription {
             get {
                 return ResourceManager.GetString("IndexRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Paste.
+        /// </summary>
+        public static string Paste {
+            get {
+                return ResourceManager.GetString("Paste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Append to byte.
+        /// </summary>
+        public static string PushZero {
+            get {
+                return ResourceManager.GetString("PushZero", resourceCulture);
             }
         }
         

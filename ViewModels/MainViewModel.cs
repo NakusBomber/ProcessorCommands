@@ -27,8 +27,8 @@ namespace ProcessorCommands.ViewModels
 			ChangeLanguageCommand = new ChangeLanguageCommand();
 
 			CommandRegister = new StandartInputItem();
-            AldFirstRegister = new DecimalInputItem();
-            AldSecondRegister = new StandartInputItem();
+            AluFirstRegister = new DecimalInputItem();
+            AluSecondRegister = new StandartInputItem();
             ResultRegister = new StandartInputItem();
             CounterAddress = new HexadecimalInputItem();
             AddressRegister = new HexadecimalInputItem();
@@ -81,24 +81,24 @@ namespace ProcessorCommands.ViewModels
 			}
 		}
 
-		private InputItem _aldFirstRegister;
-		public InputItem AldFirstRegister
+		private InputItem _aluFirstRegister;
+		public InputItem AluFirstRegister
         {
-			get { return _aldFirstRegister; }
+			get { return _aluFirstRegister; }
 			set
 			{
-				_aldFirstRegister = value;
+				_aluFirstRegister = value;
 				OnPropertyChanged();
 			}
 		}
 
-        private InputItem _aldSecondRegister;
-        public InputItem AldSecondRegister
+        private InputItem _aluSecondRegister;
+        public InputItem AluSecondRegister
         {
-            get { return _aldSecondRegister; }
+            get { return _aluSecondRegister; }
             set
             {
-                _aldSecondRegister = value;
+                _aluSecondRegister = value;
                 OnPropertyChanged();
             }
         }
@@ -177,8 +177,8 @@ namespace ProcessorCommands.ViewModels
                 || IndexRegisters.Any(e => e.HasErrors)
                 || RAM.Any(e => e.HasErrors)
                 || CommandRegister.HasErrors
-                || AldFirstRegister.HasErrors
-                || AldSecondRegister.HasErrors
+                || AluFirstRegister.HasErrors
+                || AluSecondRegister.HasErrors
                 || ResultRegister.HasErrors
                 || CounterAddress.HasErrors
                 || AddressRegister.HasErrors

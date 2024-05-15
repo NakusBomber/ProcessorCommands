@@ -9,15 +9,18 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/Styles/ImageStyle.xaml" />
+                <ResourceDictionary Source="../Resources/Styles/CommandButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <Button Command="{Binding Command}"
+            Style="{StaticResource ButtonStyle}"
             BorderThickness="0"
             BorderBrush="Transparent"
             Background="Transparent"
             Padding="2,0">
         <StackPanel Orientation="Vertical"
+                    Background="Transparent"
                     Margin="0,0,2,0">
             <Image Source="{Binding ImageSource}"
                    Style="{StaticResource ImageStyle}"

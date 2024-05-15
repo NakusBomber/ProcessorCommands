@@ -123,11 +123,20 @@
   <data name="AddressRegisterDescription" xml:space="preserve">
     <value>Регістр адреси</value>
   </data>
+  <data name="ALU" xml:space="preserve">
+    <value>Арифметико-логічний пристрій</value>
+  </data>
   <data name="BaseRegisterDescription" xml:space="preserve">
     <value>Регістр бази</value>
   </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Скопіювати</value>
+  </data>
   <data name="CounterAddressDescription" xml:space="preserve">
     <value>Лічильник адреси команди</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Вирізати</value>
   </data>
   <data name="DataRegisterDescription" xml:space="preserve">
     <value>Регістр даних</value>
@@ -137,6 +146,12 @@
   </data>
   <data name="IndexRegisterDescription" xml:space="preserve">
     <value>Регістр індексу</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Вставити</value>
+  </data>
+  <data name="PushZero" xml:space="preserve">
+    <value>Доповнити до байту</value>
   </data>
   <data name="RAMDescription" xml:space="preserve">
     <value>Адреса</value>
