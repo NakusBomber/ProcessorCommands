@@ -19,15 +19,15 @@ namespace ProcessorCommands.Helpers.Validations
             Regex regex = new Regex(@"^0b[01]+$");
 
             if (!regex.IsMatch(value))
-                errors.Add("Только 0 и 1 (бинарный ввод, начиная с \"0b\")");
+                errors.Add(Resources.General.BinaryOnlyZeroOne);
 
-            var notEnough = "Не хватает";
-            var moreThan = "Превышено на";
+            var notEnough = Resources.General.BinaryNotEnough;
+            var moreThan = Resources.General.BinaryMoreThan;
             if (value.Length != 10)
             {
                 var info = value.Length < 10 ? notEnough : moreThan;
                 
-                errors.Add($"Длина должна быть 8 бит ({info}: {Math.Abs(value.Length-10)})");
+                errors.Add($"{Resources.General.BinaryLengthShould} ({info}: {Math.Abs(value.Length-10)})");
             }
                 
             return errors;

@@ -70,6 +70,15 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на About.
+        /// </summary>
+        public static string AboutWindowTitle {
+            get {
+                return ResourceManager.GetString("AboutWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Address adder.
         /// </summary>
         public static string AddressAdderDescription {
@@ -97,11 +106,56 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на The application was developed by Igor Tregub, a student of UST group 943.
+        /// </summary>
+        public static string AppDevelopedBy {
+            get {
+                return ResourceManager.GetString("AppDevelopedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Base register.
         /// </summary>
         public static string BaseRegisterDescription {
             get {
                 return ResourceManager.GetString("BaseRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The length should be 8 bits.
+        /// </summary>
+        public static string BinaryLengthShould {
+            get {
+                return ResourceManager.GetString("BinaryLengthShould", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Exceeded by.
+        /// </summary>
+        public static string BinaryMoreThan {
+            get {
+                return ResourceManager.GetString("BinaryMoreThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Not enough.
+        /// </summary>
+        public static string BinaryNotEnough {
+            get {
+                return ResourceManager.GetString("BinaryNotEnough", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 0 and 1 only (binary input starting with &quot;0b&quot;).
+        /// </summary>
+        public static string BinaryOnlyZeroOne {
+            get {
+                return ResourceManager.GetString("BinaryOnlyZeroOne", resourceCulture);
             }
         }
         
@@ -174,6 +228,15 @@ namespace ProcessorCommands.Resources {
         public static string FirstRegisterDescription {
             get {
                 return ResourceManager.GetString("FirstRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Icons by .
+        /// </summary>
+        public static string IconsBy {
+            get {
+                return ResourceManager.GetString("IconsBy", resourceCulture);
             }
         }
         

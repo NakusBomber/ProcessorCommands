@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="AboutWindowTitle" xml:space="preserve">
+    <value>About</value>
+  </data>
   <data name="AddressAdderDescription" xml:space="preserve">
     <value>Address adder</value>
   </data>
@@ -129,8 +132,23 @@
   <data name="ALU" xml:space="preserve">
     <value>Arithmetic logic unit</value>
   </data>
+  <data name="AppDevelopedBy" xml:space="preserve">
+    <value>The application was developed by Igor Tregub, a student of UST group 943</value>
+  </data>
   <data name="BaseRegisterDescription" xml:space="preserve">
     <value>Base register</value>
+  </data>
+  <data name="BinaryLengthShould" xml:space="preserve">
+    <value>The length should be 8 bits</value>
+  </data>
+  <data name="BinaryMoreThan" xml:space="preserve">
+    <value>Exceeded by</value>
+  </data>
+  <data name="BinaryNotEnough" xml:space="preserve">
+    <value>Not enough</value>
+  </data>
+  <data name="BinaryOnlyZeroOne" xml:space="preserve">
+    <value>0 and 1 only (binary input starting with "0b")</value>
   </data>
   <data name="CommandRegisterDescription" xml:space="preserve">
     <value>Command register</value>
@@ -155,6 +173,9 @@
   </data>
   <data name="FirstRegisterDescription" xml:space="preserve">
     <value>First register</value>
+  </data>
+  <data name="IconsBy" xml:space="preserve">
+    <value>Icons by </value>
   </data>
   <data name="IndexRegisterDescription" xml:space="preserve">
     <value>Index register</value>

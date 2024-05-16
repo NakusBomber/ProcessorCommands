@@ -4,13 +4,41 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProcessorCommands.Views"
+        xmlns:vm="clr-namespace:ProcessorCommands.ViewModels"
+        xmlns:resources="clr-namespace:ProcessorCommands.Resources"
         mc:Ignorable="d"
-        Title="AboutWindow"
+        Title="{x:Static resources:General.AboutWindowTitle}"
         ResizeMode="NoResize"
-        Height="200"
-        Width="180">
+        Height="260"
+        Width="210">
+    <Window.DataContext>
+        <vm:AboutViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Styles/HoverStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="ClearButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="{TemplateBinding Background}">
+                                <ContentPresenter />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
@@ -19,44 +47,73 @@
         <StackPanel Grid.Row="0"
                     Width="48"
                     RenderTransformOrigin="0.5,0.5"
-                    Height="48">
-            <StackPanel.Style>
-                <Style TargetType="StackPanel">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0.5"
-                                                         From="48"
-                                                         To="54"
-                                                         Storyboard.TargetProperty="Width" />
-                                        <DoubleAnimation Duration="0:0:0.5"
-                                                         From="48"
-                                                         To="54"
-                                                         Storyboard.TargetProperty="Height" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0.3"
-                                                         To="48"
-                                                         Storyboard.TargetProperty="Width" />
-                                        <DoubleAnimation Duration="0:0:0.3"
-                                                         To="48"
-                                                         Storyboard.TargetProperty="Height" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </StackPanel.Style>
+                    Height="48"
+                    Style="{StaticResource FaviconHover}">
             <Image Source="../Media/favicon.ico"/>
         </StackPanel>
 
+        <TextBlock Grid.Row="1"
+                   VerticalAlignment="Center"
+                   TextAlignment="Center"
+                   Padding="15,0"
+                   Text="{x:Static resources:General.AppDevelopedBy}"
+                   TextWrapping="Wrap"/>
 
+        <Grid Grid.Row="2"
+              VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                        RenderTransformOrigin="0.5,0.5"
+                        Height="32"
+                        Width="32"
+                        Style="{StaticResource LinksHover}">
+                <Button Command="{Binding OpenURLCommand}"
+                        Cursor="Hand"
+                        CommandParameter="https://github.com/NakusBomber/ProcessorCommands"
+                        Style="{StaticResource ClearButtonStyle}">
+                    <Image Source="../Media/github.png"/>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1"
+                        RenderTransformOrigin="0.5,0.5"
+                        Height="32"
+                        Width="32"
+                        Style="{StaticResource LinksHover}">
+                <Button Command="{Binding OpenURLCommand}"
+                        Cursor="Hand"
+                        CommandParameter="https://t.me/i_nakus"
+                        Style="{StaticResource ClearButtonStyle}">
+                    <Image Source="../Media/telegram.png"/>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+
+        <StackPanel Grid.Row="3"
+                    Orientation="Vertical"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="{Binding Version}"
+                       Foreground="Gray"
+                       TextAlignment="Center"/>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,0,0,3">
+                <TextBlock Text="{x:Static resources:General.IconsBy}"
+                           Foreground="Gray"/>
+                <Button Command="{Binding OpenURLCommand}"
+                        Cursor="Hand"
+                        CommandParameter="https://icons8.com"
+                        Style="{StaticResource ClearButtonStyle}">
+                    <TextBlock Text="Icons8"
+                               Foreground="Gray"
+                               TextDecorations="Underline"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

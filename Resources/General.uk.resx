@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>Про додаток</value>
   </data>
+  <data name="AboutWindowTitle" xml:space="preserve">
+    <value>Про додаток</value>
+  </data>
   <data name="AddressAdderDescription" xml:space="preserve">
     <value>Суматор адреси</value>
   </data>
@@ -129,8 +132,23 @@
   <data name="ALU" xml:space="preserve">
     <value>Арифметико-логічний пристрій</value>
   </data>
+  <data name="AppDevelopedBy" xml:space="preserve">
+    <value>Додаток розроблений студентом УДУНТ 943 групи - Трегубом Ігорем</value>
+  </data>
   <data name="BaseRegisterDescription" xml:space="preserve">
     <value>Регістр бази</value>
+  </data>
+  <data name="BinaryLengthShould" xml:space="preserve">
+    <value>Довжина має бути 8 біт</value>
+  </data>
+  <data name="BinaryMoreThan" xml:space="preserve">
+    <value>Перевищено на</value>
+  </data>
+  <data name="BinaryNotEnough" xml:space="preserve">
+    <value>Бракує</value>
+  </data>
+  <data name="BinaryOnlyZeroOne" xml:space="preserve">
+    <value>Тільки 0 і 1 (бінарне введення, починаючи з "0b")</value>
   </data>
   <data name="CommandRegisterDescription" xml:space="preserve">
     <value>Регістр команди</value>
@@ -155,6 +173,9 @@
   </data>
   <data name="FirstRegisterDescription" xml:space="preserve">
     <value>Перший регістр</value>
+  </data>
+  <data name="IconsBy" xml:space="preserve">
+    <value>Значки з </value>
   </data>
   <data name="IndexRegisterDescription" xml:space="preserve">
     <value>Регістр індексу</value>

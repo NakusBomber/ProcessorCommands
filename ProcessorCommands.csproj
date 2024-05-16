@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\ChangeLanguageCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\OpenURLCommand.cs" />
     <Compile Include="Commands\PushZeroCommand.cs" />
     <Compile Include="Commands\RefreshCommand.cs" />
     <Compile Include="Commands\StartCommand.cs" />
@@ -102,6 +103,7 @@
       <DependentUpon>ProgramStatus.resx</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\ContextViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -122,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\DataGridStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\HoverStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,6 +215,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Media\push_zero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\github.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\telegram.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
