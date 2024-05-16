@@ -10,6 +10,7 @@ using System.Linq;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ProcessorCommands.ViewModels
@@ -235,5 +236,6 @@ namespace ProcessorCommands.ViewModels
                 _ram = value;
             }
         }
+
     }
 }

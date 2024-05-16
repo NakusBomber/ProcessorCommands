@@ -1,5 +1,6 @@
 ﻿using ProcessorCommands.Helpers;
 using ProcessorCommands.ViewModels;
+using ProcessorCommands.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,13 @@ namespace ProcessorCommands
             InitializeComponent();
             this.DataContext = new MainViewModel();
         }
-        
+
+        private void AboutItem_Click(object sender, RoutedEventArgs e)
+        {
+            var aboutWindow = new AboutWindow();
+            aboutWindow.Owner = this;
+            aboutWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            aboutWindow.Show();
+        }
     }
 }

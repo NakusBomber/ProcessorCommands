@@ -49,7 +49,8 @@
             </MenuItem>
             <MenuItem Header="{x:Static resources:General.Info}">
                 <MenuItem Header="{x:Static resources:General.Reference}"/>
-                <MenuItem Header="{x:Static resources:General.About}"/>
+                <MenuItem Header="{x:Static resources:General.About}"
+                          Click="AboutItem_Click"/>
             </MenuItem>
         </Menu>
 
