@@ -171,6 +171,9 @@
   <data name="English" xml:space="preserve">
     <value>Англійська</value>
   </data>
+  <data name="EntryMustNotStartWith" xml:space="preserve">
+    <value>Введення не повинно починатися з</value>
+  </data>
   <data name="FirstRegisterDescription" xml:space="preserve">
     <value>Перший регістр</value>
   </data>
@@ -186,8 +189,20 @@
   <data name="Language" xml:space="preserve">
     <value>Мова</value>
   </data>
+  <data name="LettersNotAllowed" xml:space="preserve">
+    <value>Літери не допускаються</value>
+  </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Демонстрація виконання команди</value>
+  </data>
+  <data name="NumberMustBeByte" xml:space="preserve">
+    <value>Число має бути в межах байта</value>
+  </data>
+  <data name="OnlyByteValues" xml:space="preserve">
+    <value>Тільки байтові значення</value>
+  </data>
+  <data name="OnlyHexLettersAndNumbers" xml:space="preserve">
+    <value>Тільки цифри і букви A-F (шістнадцяткове введення, починаючи з "0x")</value>
   </data>
   <data name="Paste" xml:space="preserve">
     <value>Вставити</value>

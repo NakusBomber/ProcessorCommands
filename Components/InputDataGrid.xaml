@@ -16,6 +16,7 @@
     </UserControl.Resources>
     <DataGrid ItemsSource="{Binding ItemsSource}"
               Margin="3"
+              EnableRowVirtualization="False"
               AutoGenerateColumns="False"
               CanUserResizeRows="False"
               CanUserAddRows="False"

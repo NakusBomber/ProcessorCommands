@@ -171,6 +171,9 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="EntryMustNotStartWith" xml:space="preserve">
+    <value>Entry must not start with</value>
+  </data>
   <data name="FirstRegisterDescription" xml:space="preserve">
     <value>First register</value>
   </data>
@@ -186,8 +189,20 @@
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="LettersNotAllowed" xml:space="preserve">
+    <value>Letters are not allowed</value>
+  </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Demonstration of command execution</value>
+  </data>
+  <data name="NumberMustBeByte" xml:space="preserve">
+    <value>The number must be within a byte</value>
+  </data>
+  <data name="OnlyByteValues" xml:space="preserve">
+    <value>Byte values only</value>
+  </data>
+  <data name="OnlyHexLettersAndNumbers" xml:space="preserve">
+    <value>Numbers and letters A-F only (hexadecimal input starting with "0x")</value>
   </data>
   <data name="Paste" xml:space="preserve">
     <value>Paste</value>

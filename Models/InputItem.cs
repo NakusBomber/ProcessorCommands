@@ -47,6 +47,19 @@ namespace ProcessorCommands.Models
             }
         }
 
+        private bool _animate = false;
+
+        public bool Animate
+        {
+            get { return _animate; }
+            set
+            {
+                _animate = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
 

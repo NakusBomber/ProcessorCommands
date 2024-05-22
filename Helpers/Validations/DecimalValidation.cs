@@ -16,13 +16,15 @@ namespace ProcessorCommands.Helpers.Validations
                 return errors;
 
             if (!int.TryParse(value, out int intValue))
-                errors.Add("Буквы не допускаются");
+                errors.Add(Resources.General.LettersNotAllowed);
 
             if (intValue < 0 || intValue > 255)
-                errors.Add("Только байтовые значения (0 - 255)");
+            {
+                errors.Add($"{Resources.General.OnlyByteValues} (0 - 255)");
+            }
 
             if (intValue > 0 && value.StartsWith("0"))
-                errors.Add("Ввод не должен начинаться с 0");
+                errors.Add($"{Resources.General.EntryMustNotStartWith} 0");
 
             return errors;
         }

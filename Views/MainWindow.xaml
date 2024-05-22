@@ -21,6 +21,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/Styles/ToolBarStyle.xaml"/>
+                <ResourceDictionary Source="../Resources/Styles/LabelStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -99,7 +100,8 @@
                     <GroupBox Header="{x:Static resources:General.CommandRegisterDescription}"
                               Margin="0,0,0,6"
                               DataContext="{Binding CommandRegister}">
-                        <TextBlock Text="{Binding Value}"/>
+                        <TextBlock Text="{Binding Value}"
+                                   Style="{StaticResource LabelStyle}"/>
                     </GroupBox>
 
 
@@ -134,17 +136,21 @@
                                          Item="{Binding DataContext.CounterAddress, RelativeSource={RelativeSource AncestorType=Window}}"
                                          IsBlockInput="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}}"/>
 
-                    <GroupBox Header="{x:Static resources:General.AddressRegisterDescription}"
-                              Margin="0,0,0,6"
-                              DataContext="{Binding AddressRegister}">
-                        <TextBlock Text="{Binding Value}"/>
-                    </GroupBox>
-
                     <GroupBox Header="{x:Static resources:General.AddressAdderDescription}"
                               Margin="0,0,0,6"
                               DataContext="{Binding AddressAdder}">
-                        <TextBlock Text="{Binding Value}"/>
+                        <TextBlock Text="{Binding Value}"
+                                   Style="{StaticResource LabelStyle}"/>
                     </GroupBox>
+
+                    <GroupBox Header="{x:Static resources:General.AddressRegisterDescription}"
+                              Margin="0,0,0,6"
+                              DataContext="{Binding AddressRegister}">
+                        <TextBlock Text="{Binding Value}"
+                                   Style="{StaticResource LabelStyle}"/>
+                    </GroupBox>
+
+
 
                     <components:InputDataGrid ItemsSource="{Binding DataContext.RAM, RelativeSource={RelativeSource AncestorType=Window}}"
                                               Height="139"
@@ -156,7 +162,8 @@
                     <GroupBox Header="{x:Static resources:General.WordRegisterDescription}"
                               Margin="0,0,0,6"
                               DataContext="{Binding WordRegister}">
-                        <TextBlock Text="{Binding Value}"/>
+                        <TextBlock Text="{Binding Value}"
+                                   Style="{StaticResource LabelStyle}"/>
                     </GroupBox>
                 </StackPanel>
 
@@ -178,12 +185,14 @@
                             <GroupBox Header="{x:Static resources:General.SecondRegisterDescription}"
                                       Grid.Column="2"
                                       DataContext="{Binding AluSecondRegister}">
-                                <TextBlock Text="{Binding Value}"/>
+                                <TextBlock Text="{Binding Value}"
+                                           Style="{StaticResource LabelStyle}"/>
                             </GroupBox>
                         </Grid>
                         <GroupBox Header="{x:Static resources:General.ResultRegisterDescription}"
                                   DataContext="{Binding ResultRegister}">
-                            <TextBlock Text="{Binding Value}"/>
+                            <TextBlock Text="{Binding Value}"
+                                       Style="{StaticResource LabelStyle}"/>
                         </GroupBox>
                     </StackPanel>
                 </GroupBox>

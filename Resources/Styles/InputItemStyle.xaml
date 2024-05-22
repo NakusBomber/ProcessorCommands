@@ -8,6 +8,7 @@
 
     <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource DataGridBaseStyle}">
         <Setter Property="BorderBrush" Value="Blue"/>
+        <Setter Property="BorderThickness" Value="2"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=components:InputBox}, Path=Item.HasErrors, TargetNullValue=False}" Value="True">
                 <Setter Property="BorderBrush" Value="Red"/>
@@ -21,5 +22,15 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
         <Setter Property="ContextMenu" Value="{StaticResource DefaultContextMenu}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Item.Animate}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource StartAnimate}"/>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard Storyboard="{StaticResource EndAnimate}"/>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

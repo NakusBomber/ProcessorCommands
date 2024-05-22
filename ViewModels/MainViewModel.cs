@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Resources;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -17,9 +18,10 @@ namespace ProcessorCommands.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private StandartProcessor processor = new Intel8080Model(); 
+        private Intel8080Model processor; 
 		public MainViewModel()
 		{
+            processor = new Intel8080Model();
 			Status = ProgramStatus.Nothing;
 			CreateCommands();
             CreateRegisters();
@@ -48,17 +50,17 @@ namespace ProcessorCommands.ViewModels
             DataRegisters = new ObservableCollection<InputItem>();
             for (int i = 0; i < processor.CountDataRegisters; i++)
             {
-                DataRegisters.Add(new DecimalInputItem($"{i + 1}"));
+                DataRegisters.Add(new DecimalInputItem($"{i}"));
             }
             BaseRegisters = new ObservableCollection<InputItem>();
             for (int i = 0; i < processor.CountBaseRegisters; i++)
             {
-                BaseRegisters.Add(new HexadecimalInputItem($"{i + 1}"));
+                BaseRegisters.Add(new HexadecimalInputItem($"{i}"));
             }
             IndexRegisters = new ObservableCollection<InputItem>();
             for (int i = 0; i < processor.CountIndexRegisters; i++)
             {
-                IndexRegisters.Add(new DecimalInputItem($"{i + 1}"));
+                IndexRegisters.Add(new DecimalInputItem($"{i}"));
             }
             RAM = new ObservableCollection<InputItem>();
             for (int i = 0; i < processor.SizeRAM; i++)

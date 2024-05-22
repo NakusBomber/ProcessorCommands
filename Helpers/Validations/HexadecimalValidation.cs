@@ -19,17 +19,16 @@ namespace ProcessorCommands.Helpers.Validations
 
             if (!regex.IsMatch(value))
             {
-                errors.Add("Только цифры и буквы A-F (шестнадцатеричный ввод, начиная с \"0x\")");
+                errors.Add(Resources.General.OnlyHexLettersAndNumbers);
             }
             else
             {
                 var intValue = Convert.ToInt32(value, 16);
                 if (intValue < 0 || intValue > 255)
-                    errors.Add("Число должно быть в пределах байта");
+                    errors.Add(Resources.General.NumberMustBeByte);
             }
 
             
-
             return errors;
         }
     }

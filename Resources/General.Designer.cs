@@ -223,6 +223,15 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Entry must not start with.
+        /// </summary>
+        public static string EntryMustNotStartWith {
+            get {
+                return ResourceManager.GetString("EntryMustNotStartWith", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на First register.
         /// </summary>
         public static string FirstRegisterDescription {
@@ -268,11 +277,47 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Letters are not allowed.
+        /// </summary>
+        public static string LettersNotAllowed {
+            get {
+                return ResourceManager.GetString("LettersNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Demonstration of command execution.
         /// </summary>
         public static string MainWindowTitle {
             get {
                 return ResourceManager.GetString("MainWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The number must be within a byte.
+        /// </summary>
+        public static string NumberMustBeByte {
+            get {
+                return ResourceManager.GetString("NumberMustBeByte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Byte values only.
+        /// </summary>
+        public static string OnlyByteValues {
+            get {
+                return ResourceManager.GetString("OnlyByteValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Numbers and letters A-F only (hexadecimal input starting with &quot;0x&quot;).
+        /// </summary>
+        public static string OnlyHexLettersAndNumbers {
+            get {
+                return ResourceManager.GetString("OnlyHexLettersAndNumbers", resourceCulture);
             }
         }
         

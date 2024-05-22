@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Storyboard x:Key="StartAnimate">
+        <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                        Duration="0:0:0.7"
+                        To="LightGreen"/>
+    </Storyboard>
+
+    <Storyboard x:Key="EndAnimate">
+        <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                        Duration="0:0:0.3"
+                        To="Transparent"/>
+    </Storyboard>
+</ResourceDictionary>
