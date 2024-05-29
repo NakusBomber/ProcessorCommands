@@ -22,6 +22,7 @@ namespace ProcessorCommands.Commands
             {
                 case ProgramStatus.Stop:
                 case ProgramStatus.Nothing:
+                case ProgramStatus.Finish:
                     return true;
                 default:
                     return false;

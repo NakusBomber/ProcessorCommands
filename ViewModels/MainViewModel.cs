@@ -23,17 +23,21 @@ namespace ProcessorCommands.ViewModels
 		{
             processor = new Intel8080Model();
 			Status = ProgramStatus.Nothing;
+            Command = ECommands.Unspecified;
+            Step = -1;
+            MaxStep = 999;
 			CreateCommands();
             CreateRegisters();
         }
 
         private void CreateCommands()
         {
-            StartCommand = new StartCommand(this);
             StopCommand = new StopCommand(this);
-            StepCommand = new StepCommand(this);
+            StartCommand = new StartCommand(this, Start, StopCommand);
+            StepCommand = new StepCommand(this, MakeStep, StopCommand);
             RefreshCommand = new RefreshCommand(this);
             ChangeLanguageCommand = new ChangeLanguageCommand();
+            LoadSetUpCommand = new LoadSetUpCommand(this, StopCommand, RefreshCommand);
         }
 
         private void CreateRegisters()
@@ -69,7 +73,233 @@ namespace ProcessorCommands.ViewModels
             }
         }
 
-		private ProgramStatus _status;
+        public async Task Start(CancellationToken token)
+        {
+            do
+            {
+                await MakeStep(token);
+                await Delay();
+                token.ThrowIfCancellationRequested();
+            } while (Status != ProgramStatus.Finish);
+        }
+        
+        public async Task MakeStep(CancellationToken token)
+        {
+            switch (Step)
+            {
+                case -1:
+                    Status = ProgramStatus.Start;
+
+                    Step = 0;
+                    Status = ProgramStatus.SampleCommand;
+                    token.ThrowIfCancellationRequested();
+                    break;
+                case 0:
+                    Status = ProgramStatus.DecryptCommand;
+                    await Delay();
+                    token.ThrowIfCancellationRequested();
+                    await SampleByteCommand(0, token);
+                    Command = processor.GetCommand(WordRegister.Value);
+                    break;
+                default:
+                    switch (Command)
+                    {
+                        case ECommands.R:
+                            await R(token);
+                            break;
+                        case ECommands.S:
+                            await S(token);
+                            break;
+                        case ECommands.X:
+                            await X(token);
+                            break;
+                        case ECommands.I:
+                            await I(token);
+                            break;
+                        case ECommands.RR:
+                            await RR(token);
+                            break;
+                        case ECommands.RS:
+                            await RS(token);
+                            break;
+                        case ECommands.RX:
+                            await RX(token);
+                            break;
+                        case ECommands.SX:
+                            await SX(token);
+                            break;
+                        case ECommands.RSX:
+                            await RSX(token);
+                            break;
+                        default:
+                            throw new NotImplementedException();
+                    }
+                    break;
+            }
+
+            token.ThrowIfCancellationRequested();
+        }
+        private async Task R(CancellationToken token) { }
+        private async Task S(CancellationToken token) { }
+        private async Task X(CancellationToken token) { }
+        private async Task I(CancellationToken token) { }
+        private async Task RR(CancellationToken token)
+        {
+            MaxStep = 6;
+            switch (Step)
+            {
+                case 1:
+                    await SampleByteCommand(1, token);
+                    break;
+                case 2:
+                    await SampleOperand(0, token);
+                    break;
+                case 3:
+                    await SampleOperand(1, token);
+                    break;
+                case 4:
+                    await Execute(token);
+                    break;
+                case 5:
+                    await Save(token);
+                    await Delay(400);
+                    Finish();
+                    break;
+                default:
+                    break;
+            }
+            
+            
+        }
+        private async Task RX(CancellationToken token) { }
+        private async Task SX(CancellationToken token) { }
+        private async Task RS(CancellationToken token) { }
+        private async Task RSX(CancellationToken token) { }
+
+
+        private async Task Delay(int millis = 1500)
+        {
+            await Task.Delay(millis);
+        }
+
+        private async Task SampleByteCommand(int numberByte, CancellationToken token)
+        {
+            token.ThrowIfCancellationRequested();
+            switch (numberByte)
+            {
+                case 0:
+                    Status = ProgramStatus.Sample1Byte;
+                    break;
+                case 1:
+                    Status = ProgramStatus.Sample2Byte;
+                    break;
+                case 2:
+                    Status = ProgramStatus.Sample3Byte;
+                    break;
+                default:
+                    return;
+            }
+
+            if(numberByte == 0)
+            {
+                await CounterAddress.Animation();
+                await AddressRegister.Animation();
+                AddressRegister.Value = CounterAddress.Value;
+            }
+
+            token.ThrowIfCancellationRequested();
+
+            var value = Convert.ToInt32(AddressRegister.Value, 16);
+            await RAM[value+numberByte].Animation();
+            await WordRegister.Animation();
+
+            token.ThrowIfCancellationRequested();
+            WordRegister.Value = processor.ReadRAM(value+numberByte, RAM);
+            await WordRegister.Animation();
+            await CommandRegister.Animation();
+
+            if (numberByte == 0)
+                CommandRegister.Value = string.Empty;
+
+            CommandRegister.Value = processor.AddByteCommand(CommandRegister.Value, WordRegister.Value);
+
+            Step++;
+        }
+        private async Task SampleOperand(int numberOperand, CancellationToken token)
+        {
+            token.ThrowIfCancellationRequested();
+
+            switch (numberOperand)
+            {
+                case 0:
+                    Status = ProgramStatus.Sample1Operand;
+                    break;
+                case 1:
+                    Status = ProgramStatus.Sample2Operand;
+                    break;
+                default:
+                    return;
+            }
+
+            var register = processor.GetIndexDataRegister(CommandRegister.Value.Split()[1], numberOperand == 0);
+            await DataRegisters[register].Animation();
+
+            token.ThrowIfCancellationRequested();
+
+            if (numberOperand == 0)
+            {
+                await AluFirstRegister.Animation();
+                AluFirstRegister.Value = DataRegisters[register].Value;
+            }
+            else
+            {
+                await AluSecondRegister.Animation();
+                AluSecondRegister.Value = DataRegisters[register].Value;
+            }
+            Step++;
+        }
+        private async Task Execute(CancellationToken token)
+        {
+            Status = ProgramStatus.ExecutionCommand;
+
+            token.ThrowIfCancellationRequested();
+
+            await AluFirstRegister.Animation();
+            await ResultRegister.Animation();
+            ResultRegister.Value = AluFirstRegister.Value;
+
+            token.ThrowIfCancellationRequested();
+
+            await AluSecondRegister.Animation();
+            await ResultRegister.Animation();
+            ResultRegister.Value = processor.Accumulate(AluFirstRegister.Value, AluSecondRegister.Value);
+            Step++;
+        }
+        private async Task Save(CancellationToken token)
+        {
+            Status = ProgramStatus.SaveResult;
+
+            token.ThrowIfCancellationRequested();
+
+            var firstByte = CommandRegister.Value.Split()[0];
+            var secondByte = CommandRegister.Value.Split()[1];
+            var isSaveFirstPlace = processor.isFirstPlaceSaveResult(firstByte);
+            var place = processor.GetIndexDataRegister(secondByte, isSaveFirstPlace);
+            await ResultRegister.Animation();
+            await DataRegisters[place].Animation();
+            DataRegisters[place].Value = ResultRegister.Value;
+            Step++;
+        }
+
+        private void Finish()
+        {
+            Status = ProgramStatus.Finish;
+            Command = ECommands.Unspecified;
+            Step = -1;
+            MaxStep = 999;
+        }
+
+        private ProgramStatus _status;
 		public ProgramStatus Status
 		{
 			get => _status;
@@ -82,7 +312,62 @@ namespace ProcessorCommands.ViewModels
 			}
 		}
 
-		private InputItem _commandRegister;
+        private ECommands _command;
+
+        public ECommands Command
+        {
+            get { return _command; }
+            set
+            {
+                _command = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CommandDescription));
+                OnPropertyChanged(nameof(StepVisibility));
+            }
+        }
+
+        public string CommandDescription => Command.ToString();
+
+        private int _step;
+        public int Step
+        {
+            get { return _step; }
+            set
+            {
+                _step = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(StepVisibility));
+            }
+        }
+
+
+        private int _maxStep;
+        public int MaxStep
+        {
+            get { return _maxStep; }
+            set
+            {
+                _maxStep = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isNowExecuteCommand;
+
+        public bool IsNowExecuteCommand
+        {
+            get { return _isNowExecuteCommand; }
+            set
+            {
+                _isNowExecuteCommand = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        #region Registers
+
+        private InputItem _commandRegister;
 		public InputItem CommandRegister
 		{
 			get { return _commandRegister; }
@@ -170,18 +455,23 @@ namespace ProcessorCommands.ViewModels
             }
         }
 
-        #region Commands
-        public ICommand StartCommand { get; private set; }
-        public ICommand StopCommand { get; private set; }
-		public ICommand StepCommand { get; private set; }
-        public ICommand RefreshCommand { get; private set; }
-        public ICommand ChangeLanguageCommand { get; private set; }
-
         #endregion
 
+        #region Commands
+        public StartCommand StartCommand { get; private set; }
+        public StopCommand StopCommand { get; private set; }
+		public StepCommand StepCommand { get; private set; }
+        public RefreshCommand RefreshCommand { get; private set; }
+        public ICommand ChangeLanguageCommand { get; private set; }
+        public ICommand LoadSetUpCommand { get; private set; }
+        #endregion
+
+        public Visibility StepVisibility => (Step != -1 && Command != ECommands.Unspecified) ? Visibility.Visible : Visibility.Hidden;
         public string StatusDescription => Status.GetDescription();
-        public bool IsBlockInput => (Status != ProgramStatus.Nothing && Status != ProgramStatus.Stop);
-        public bool HasError =>  isErrorVM();
+        public bool IsBlockInput => (Status != ProgramStatus.Nothing && 
+                                        Status != ProgramStatus.Stop &&
+                                        Status != ProgramStatus.Finish);
+        public bool HasError => isErrorVM();
 
         private bool isErrorVM()
         {

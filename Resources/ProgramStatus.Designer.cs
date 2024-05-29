@@ -61,11 +61,101 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Декодування кода операції.
+        /// </summary>
+        internal static string DecryptCommand {
+            get {
+                return ResourceManager.GetString("DecryptCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконання команди.
+        /// </summary>
+        internal static string ExecutionCommand {
+            get {
+                return ResourceManager.GetString("ExecutionCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Обробка команди завершено.
+        /// </summary>
+        internal static string Finish {
+            get {
+                return ResourceManager.GetString("Finish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на .
         /// </summary>
         internal static string Nothing {
             get {
                 return ResourceManager.GetString("Nothing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вибірка 1-го байту команди.
+        /// </summary>
+        internal static string Sample1Byte {
+            get {
+                return ResourceManager.GetString("Sample1Byte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вибірка 1-го операнду.
+        /// </summary>
+        internal static string Sample1Operand {
+            get {
+                return ResourceManager.GetString("Sample1Operand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вибірка 2-го байту команди.
+        /// </summary>
+        internal static string Sample2Byte {
+            get {
+                return ResourceManager.GetString("Sample2Byte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вибірка 2-го операнду.
+        /// </summary>
+        internal static string Sample2Operand {
+            get {
+                return ResourceManager.GetString("Sample2Operand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вибірка 3-го байту команди.
+        /// </summary>
+        internal static string Sample3Byte {
+            get {
+                return ResourceManager.GetString("Sample3Byte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вибірка і декодування команди.
+        /// </summary>
+        internal static string SampleCommand {
+            get {
+                return ResourceManager.GetString("SampleCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Запис результату.
+        /// </summary>
+        internal static string SaveResult {
+            get {
+                return ResourceManager.GetString("SaveResult", resourceCulture);
             }
         }
         

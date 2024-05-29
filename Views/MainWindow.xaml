@@ -53,6 +53,11 @@
                 <MenuItem Header="{x:Static resources:General.About}"
                           Click="AboutItem_Click"/>
             </MenuItem>
+            <MenuItem Header="{x:Static resources:General.Templates}">
+                <MenuItem Header="RR"
+                          Command="{Binding LoadSetUpCommand}"
+                          CommandParameter="4"/>
+            </MenuItem>
         </Menu>
 
         <Border Grid.Row="1"
@@ -201,7 +206,7 @@
         </Grid>
 
         <StatusBar Grid.Row="3">
-            <StatusBarItem>
+            <StatusBarItem Width="500">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding Source={x:Static resources:General.StatusDescription}, StringFormat='{}{0}:'}"
                                Margin="10,0,10,0"
@@ -209,6 +214,29 @@
                     <TextBlock Text="{Binding StatusDescription}"/>
                 </StackPanel>
             </StatusBarItem>
+
+            <StackPanel Orientation="Horizontal"
+                        Visibility="{Binding StepVisibility}">
+                <StatusBarItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Source={x:Static resources:General.Command}, StringFormat='{}{0}:'}"
+                                   Margin="10,0,10,0"
+                                   FontWeight="Bold"/>
+                        <TextBlock Text="{Binding CommandDescription}"/>
+                    </StackPanel>
+                </StatusBarItem>
+
+                <StatusBarItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Source={x:Static resources:General.Step}, StringFormat='{}{0}:'}"
+                                   Margin="10,0,10,0"
+                                   FontWeight="Bold"/>
+                        <ProgressBar Value="{Binding Step}"
+                                     Maximum="{Binding MaxStep}"
+                                     Width="200"/>
+                    </StackPanel>
+                </StatusBarItem>
+            </StackPanel>
         </StatusBar>
 
     </Grid>

@@ -5,7 +5,9 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="LabelStyle" TargetType="TextBlock">
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Center"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding Animate}" Value="True">
                 <DataTrigger.EnterActions>

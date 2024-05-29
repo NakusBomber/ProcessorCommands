@@ -14,7 +14,17 @@ namespace ProcessorCommands.Models
         Nothing,
         Start,
         Stop,
-        Step
+        Step,
+        SampleCommand,
+        Sample1Byte,
+        Sample2Byte,
+        Sample3Byte,
+        Sample1Operand,
+        Sample2Operand,
+        DecryptCommand,
+        ExecutionCommand,
+        SaveResult,
+        Finish
     }
 
     public static class ProgramStatusExtensions

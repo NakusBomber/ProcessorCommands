@@ -150,6 +150,9 @@
   <data name="BinaryOnlyZeroOne" xml:space="preserve">
     <value>Тільки 0 і 1 (бінарне введення, починаючи з "0b")</value>
   </data>
+  <data name="Command" xml:space="preserve">
+    <value>Команда</value>
+  </data>
   <data name="CommandRegisterDescription" xml:space="preserve">
     <value>Регістр команди</value>
   </data>
@@ -239,6 +242,9 @@
   </data>
   <data name="Stop" xml:space="preserve">
     <value>Стоп</value>
+  </data>
+  <data name="Templates" xml:space="preserve">
+    <value>Шаблони</value>
   </data>
   <data name="Ukrainian" xml:space="preserve">
     <value>Українська</value>

@@ -117,8 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DecryptCommand" xml:space="preserve">
+    <value>Декодування кода операції</value>
+  </data>
+  <data name="ExecutionCommand" xml:space="preserve">
+    <value>Виконання команди</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Обробка команди завершено</value>
+  </data>
   <data name="Nothing" xml:space="preserve">
     <value />
+  </data>
+  <data name="Sample1Byte" xml:space="preserve">
+    <value>Вибірка 1-го байту команди</value>
+  </data>
+  <data name="Sample1Operand" xml:space="preserve">
+    <value>Вибірка 1-го операнду</value>
+  </data>
+  <data name="Sample2Byte" xml:space="preserve">
+    <value>Вибірка 2-го байту команди</value>
+  </data>
+  <data name="Sample2Operand" xml:space="preserve">
+    <value>Вибірка 2-го операнду</value>
+  </data>
+  <data name="Sample3Byte" xml:space="preserve">
+    <value>Вибірка 3-го байту команди</value>
+  </data>
+  <data name="SampleCommand" xml:space="preserve">
+    <value>Вибірка і декодування команди</value>
+  </data>
+  <data name="SaveResult" xml:space="preserve">
+    <value>Запис результату</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Початок виконання</value>

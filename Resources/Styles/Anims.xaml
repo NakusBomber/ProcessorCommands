@@ -3,13 +3,13 @@
 
     <Storyboard x:Key="StartAnimate">
         <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                        Duration="0:0:0.7"
+                        Duration="0:0:1"
                         To="LightGreen"/>
     </Storyboard>
 
     <Storyboard x:Key="EndAnimate">
         <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                        Duration="0:0:0.3"
-                        To="Transparent"/>
+                        Duration="0:0:1"
+                        To="White"/>
     </Storyboard>
 </ResourceDictionary>
