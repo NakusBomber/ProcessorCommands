@@ -95,6 +95,17 @@
     <Compile Include="Models\InputItem.cs" />
     <Compile Include="Models\Intel8080Model.cs" />
     <Compile Include="Models\NotifyTaskCompletion.cs" />
+    <Compile Include="Models\ProcessorCommands\I.cs" />
+    <Compile Include="Models\ProcessorCommands\ProcessorCommand.cs" />
+    <Compile Include="Models\ProcessorCommands\ProcessorCommandCreator.cs" />
+    <Compile Include="Models\ProcessorCommands\R.cs" />
+    <Compile Include="Models\ProcessorCommands\RR.cs" />
+    <Compile Include="Models\ProcessorCommands\RS.cs" />
+    <Compile Include="Models\ProcessorCommands\RSX.cs" />
+    <Compile Include="Models\ProcessorCommands\RX.cs" />
+    <Compile Include="Models\ProcessorCommands\S.cs" />
+    <Compile Include="Models\ProcessorCommands\SX.cs" />
+    <Compile Include="Models\ProcessorCommands\X.cs" />
     <Compile Include="Models\StandartProcessor.cs" />
     <Compile Include="Models\ProgramStatus.cs" />
     <Compile Include="Commands\RelayCommand.cs" />

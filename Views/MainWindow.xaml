@@ -54,9 +54,13 @@
                           Click="AboutItem_Click"/>
             </MenuItem>
             <MenuItem Header="{x:Static resources:General.Templates}">
+                <MenuItem Header="R"
+                          Command="{Binding LoadSetUpCommand}"
+                          CommandParameter="0"/>
                 <MenuItem Header="RR"
                           Command="{Binding LoadSetUpCommand}"
                           CommandParameter="4"/>
+
             </MenuItem>
         </Menu>
 

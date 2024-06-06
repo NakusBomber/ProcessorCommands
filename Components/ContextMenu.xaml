@@ -3,7 +3,6 @@
                     xmlns:resources="clr-namespace:ProcessorCommands.Resources"
                     xmlns:vm="clr-namespace:ProcessorCommands.ViewModels">
 
-
     <ContextMenu x:Key="DefaultContextMenu">
         <ContextMenu.DataContext>
             <vm:ContextViewModel/>

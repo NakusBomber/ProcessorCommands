@@ -11,13 +11,9 @@ namespace ProcessorCommands.Commands
     public class LoadSetUpCommand : CommandBase
     {
         private MainViewModel _vm;
-        private StopCommand _stopCommand;
-        private RefreshCommand _refreshCommand;
-        public LoadSetUpCommand(MainViewModel vm, StopCommand stopCommand, RefreshCommand refreshCommand)
+        public LoadSetUpCommand(MainViewModel vm)
         {
             _vm = vm;
-            _stopCommand = stopCommand;
-            _refreshCommand = refreshCommand;
         }
         
         public override void Execute(object parameter)
@@ -36,12 +32,24 @@ namespace ProcessorCommands.Commands
 
             switch (command)
             {
+                case ECommands.R:
+                    R();
+                    break;
                 case ECommands.RR:
                     RR();
                     break;
                 default:
                     throw new NotImplementedException();
             }
+        }
+
+        private void R()
+        {
+            _vm.CounterAddress.Value = "0x2";
+            _vm.AluFirstRegister.Value = "56";
+            _vm.DataRegisters[5].Value = "26";
+            _vm.RAM[2].Value = "0b00000000";
+            _vm.RAM[3].Value = "0b10100000";
         }
 
         private void RR()
