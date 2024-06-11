@@ -250,6 +250,15 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Flag register.
+        /// </summary>
+        public static string FlagRegisterDescription {
+            get {
+                return ResourceManager.GetString("FlagRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Icons by .
         /// </summary>
         public static string IconsBy {
@@ -304,6 +313,15 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Negative.
+        /// </summary>
+        public static string Negative {
+            get {
+                return ResourceManager.GetString("Negative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на The number must be within a byte.
         /// </summary>
         public static string NumberMustBeByte {
@@ -331,11 +349,29 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Overflow.
+        /// </summary>
+        public static string Overflow {
+            get {
+                return ResourceManager.GetString("Overflow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Paste.
         /// </summary>
         public static string Paste {
             get {
                 return ResourceManager.GetString("Paste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Positive.
+        /// </summary>
+        public static string Positive {
+            get {
+                return ResourceManager.GetString("Positive", resourceCulture);
             }
         }
         
@@ -471,6 +507,15 @@ namespace ProcessorCommands.Resources {
         public static string WordRegisterDescription {
             get {
                 return ResourceManager.GetString("WordRegisterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Zero.
+        /// </summary>
+        public static string Zero {
+            get {
+                return ResourceManager.GetString("Zero", resourceCulture);
             }
         }
     }

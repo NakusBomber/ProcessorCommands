@@ -80,6 +80,8 @@
     <Compile Include="Components\InputDataGrid.xaml.cs">
       <DependentUpon>InputDataGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BoolToContentConverter.cs" />
+    <Compile Include="Helpers\InvertBooleanConverter.cs" />
     <Compile Include="Helpers\LanguageManager.cs" />
     <Compile Include="Helpers\Validations\BinaryDecimalValidation.cs" />
     <Compile Include="Helpers\Validations\BinaryValidation.cs" />
@@ -88,8 +90,10 @@
     <Compile Include="Helpers\Validations\IValidateValue.cs" />
     <Compile Include="Models\BinaryDecimalInputItem.cs" />
     <Compile Include="Models\BinaryInputItem.cs" />
+    <Compile Include="Models\BoolInputItem.cs" />
     <Compile Include="Models\DecimalInputItem.cs" />
     <Compile Include="Models\ECommands.cs" />
+    <Compile Include="Models\EFlagActivate.cs" />
     <Compile Include="Models\ETypeCommand.cs" />
     <Compile Include="Models\HexadecimalInputItem.cs" />
     <Compile Include="Models\InputItem.cs" />
@@ -142,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\Anims.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\CheckBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

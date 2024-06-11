@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         Title="{x:Static resources:General.MainWindowTitle}"
         ResizeMode="CanMinimize"
-        Height="650"
+        Height="700"
         Width="900">
     <Window.DataContext>
         <vm:MainViewModel />
@@ -22,7 +22,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/Styles/ToolBarStyle.xaml"/>
                 <ResourceDictionary Source="../Resources/Styles/LabelStyle.xaml"/>
+                <ResourceDictionary Source="../Resources/Styles/CheckBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <helpers:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -57,6 +59,9 @@
                 <MenuItem Header="R"
                           Command="{Binding LoadSetUpCommand}"
                           CommandParameter="0"/>
+                <MenuItem Header="I"
+                          Command="{Binding LoadSetUpCommand}"
+                          CommandParameter="3"/>
                 <MenuItem Header="RR"
                           Command="{Binding LoadSetUpCommand}"
                           CommandParameter="4"/>
@@ -150,6 +155,29 @@
                               DataContext="{Binding AddressAdder}">
                         <TextBlock Text="{Binding Value}"
                                    Style="{StaticResource LabelStyle}"/>
+                    </GroupBox>
+
+                    <GroupBox Header="{x:Static resources:General.FlagRegisterDescription}"
+                              Margin="0,0,0,6"
+                              Padding="4">
+                        <GroupBox.Resources>
+                            <DataTemplate x:Key="CheckBoxDataTemplate">
+                                <CheckBox Content="{Binding Label}"
+                                          HorizontalAlignment="Center"
+                                          IsChecked="{Binding Value}"
+                                          Style="{StaticResource CheckBoxStyle}"
+                                          IsEnabled="{Binding DataContext.IsBlockInput, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource InvertBooleanConverter}}"/>
+                            </DataTemplate>
+                        </GroupBox.Resources>
+
+                        <ItemsControl ItemsSource="{Binding FlagRegisters}"
+                                      ItemTemplate="{StaticResource CheckBoxDataTemplate}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1" HorizontalAlignment="Stretch"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
                     </GroupBox>
 
                     <GroupBox Header="{x:Static resources:General.AddressRegisterDescription}"

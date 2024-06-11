@@ -38,7 +38,7 @@ namespace ProcessorCommands.Models
         }
         public ETypeCommand GetTypeCommand(string firstByteCommand)
         {
-            var intByte = Convert.ToInt32(firstByteCommand.Replace("0b", "").Substring(5, 2), 2);
+            var intByte = Convert.ToInt32(firstByteCommand.Replace("0b", "").Substring(5, 3), 2);
 
             return (ETypeCommand)intByte;
         }
@@ -91,7 +91,14 @@ namespace ProcessorCommands.Models
 
             int v3 = v1 + v2;
             if (v3 > 255)
-                throw new OverflowException($"Overflow byte value in accumulate");
+            {
+                v3 -= 255;
+            }
+            else if (v3 < -255)
+            {
+                v3 += 255;
+                v3 *= -1;
+            }
 
             return v3.ToString();
         }

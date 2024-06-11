@@ -29,9 +29,8 @@ namespace ProcessorCommands.Commands
                 return;
 
             var value = tb.Text;
-            var length = value.Length;
-            for (int i = 0; i < countChar - length; i++)
-                value += "0";
+           
+            value = value.PadRight(countChar, '0');
 
             tb.Text = value;
             tb.CaretIndex = value.Length;

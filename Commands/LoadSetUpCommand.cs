@@ -35,6 +35,9 @@ namespace ProcessorCommands.Commands
                 case ECommands.R:
                     R();
                     break;
+                case ECommands.I:
+                    I();
+                    break;
                 case ECommands.RR:
                     RR();
                     break;
@@ -51,7 +54,13 @@ namespace ProcessorCommands.Commands
             _vm.RAM[2].Value = "0b00000000";
             _vm.RAM[3].Value = "0b10100000";
         }
-
+        private void I()
+        {
+            _vm.CounterAddress.Value = "0x2";
+            _vm.AluFirstRegister.Value = "56";
+            _vm.RAM[2].Value = "0b00110000";
+            _vm.RAM[3].Value = "0b00000100";
+        }
         private void RR()
         {
             _vm.CounterAddress.Value = "0x2";

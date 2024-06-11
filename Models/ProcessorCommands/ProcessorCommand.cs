@@ -26,6 +26,7 @@ namespace ProcessorCommands.Models.ProcessorCommands
         }
 
         protected MainViewModel _vm;
+
         private int _timeMillisDelay = 1500;
         public int TimeMillisDelay
         {
@@ -35,7 +36,20 @@ namespace ProcessorCommands.Models.ProcessorCommands
                 _timeMillisDelay = value;
             }
         }
+        private EFlagActivate IsNeedFlagActivate()
+        {
+            var intValue = Convert.ToInt32(_vm.AluFirstRegister.Value) + Convert.ToInt32(_vm.AluSecondRegister.Value);
+            if (intValue < -255 || intValue > 255)
+                return EFlagActivate.Overflow;
 
+            if (intValue < 0)
+                return EFlagActivate.Negative;
+
+            if(intValue == 0)
+                return EFlagActivate.Zero;
+
+            return EFlagActivate.Positive;
+        }
         public async Task Delay(int? millis = null)
         {
             await Task.Delay(millis ?? TimeMillisDelay);
@@ -83,45 +97,13 @@ namespace ProcessorCommands.Models.ProcessorCommands
 
             _vm.Step++;
         }
-        protected virtual async Task SampleOperand(int numberOperand)
-        {
-            Token.ThrowIfCancellationRequested();
-
-            switch (numberOperand)
-            {
-                case 0:
-                    _vm.Status = ProgramStatus.Sample1Operand;
-                    break;
-                case 1:
-                    _vm.Status = ProgramStatus.Sample2Operand;
-                    break;
-                default:
-                    return;
-            }
-
-            var register = _vm.processor.GetIndexDataRegister(_vm.CommandRegister.Value.Split()[1], numberOperand == 0);
-            await _vm.DataRegisters[register].Animation();
-
-            Token.ThrowIfCancellationRequested();
-
-            if (numberOperand == 0)
-            {
-                await _vm.AluFirstRegister.Animation();
-                _vm.AluFirstRegister.Value = _vm.DataRegisters[register].Value;
-            }
-            else
-            {
-                await _vm.AluSecondRegister.Animation();
-                _vm.AluSecondRegister.Value = _vm.DataRegisters[register].Value;
-            }
-            _vm.Step++;
-        }
-        protected virtual async Task ExecuteArithmetic()
+        protected abstract Task SampleOperand(int numberOperand);
+        protected async Task ExecuteArithmetic()
         {
             _vm.Status = ProgramStatus.ExecutionCommand;
 
             Token.ThrowIfCancellationRequested();
-            
+
             await _vm.AluFirstRegister.Animation();
             await _vm.ResultRegister.Animation();
             _vm.ResultRegister.Value = _vm.AluFirstRegister.Value;
@@ -131,48 +113,86 @@ namespace ProcessorCommands.Models.ProcessorCommands
             await _vm.AluSecondRegister.Animation();
             await _vm.ResultRegister.Animation();
             _vm.ResultRegister.Value = _vm.processor.Accumulate(_vm.AluFirstRegister.Value, _vm.AluSecondRegister.Value);
- 
-            _vm.Step++;
-        }
-        protected virtual async Task ExecuteDelivery()
-        {
-            _vm.Status = ProgramStatus.ExecutionCommand;
 
-            Token.ThrowIfCancellationRequested();
-
-            var firstByte = _vm.CommandRegister.Value.Split()[0];
-            var secondByte = _vm.CommandRegister.Value.Split()[1];
-            var isFirstSavePlace = _vm.processor.isFirstPlaceSaveResult(firstByte);
-
-            var firstIndex = _vm.processor.GetIndexDataRegister(secondByte, true);
-            var secondIndex = _vm.processor.GetIndexDataRegister(secondByte, false);
-
-            var saveIndex = isFirstSavePlace ? firstIndex : secondIndex;
-            var dataIndex = isFirstSavePlace ? secondIndex : firstIndex;
-
-            await _vm.DataRegisters[dataIndex].Animation();
-            await _vm.DataRegisters[saveIndex].Animation();
-
-            Token.ThrowIfCancellationRequested();
-            _vm.DataRegisters[saveIndex].Value = _vm.DataRegisters[dataIndex].Value;
+            if (Type == ETypeCommand.Arithmetic)
+                await EnableFlags();
 
             _vm.Step++;
         }
-        protected virtual async Task Save()
+        protected virtual Task ExecuteDelivery()
         {
-            _vm.Status = ProgramStatus.SaveResult;
+            throw new NotImplementedException();
+        }
+        protected virtual Task ExecuteUnconditional()
+        {
+            throw new NotImplementedException();
+        }
+        protected virtual async Task ExecuteConditional()
+        {
+            switch (Type)
+            {
+                case ETypeCommand.ConditionalNegative:
+                    _vm.Status = ProgramStatus.CheckFlagNegative;
+                    break;
+                case ETypeCommand.ConditionalZero:
+                    _vm.Status = ProgramStatus.CheckFlagZero;
+                    break;
+                case ETypeCommand.ConditionalPositive:
+                    _vm.Status = ProgramStatus.CheckFlagPositive;
+                    break;
+                case ETypeCommand.ConditionalOverflow:
+                    _vm.Status = ProgramStatus.CheckFlagOverflow;
+                    break;
+                default:
+                    return;
+            }
+
+            int i = ((int)Type)-3;
+
+            await _vm.FlagRegisters[i].Animation();
+            if (!IsEnableFlag())
+            {
+                Finish();
+                return;
+            }
+
+            await ExecuteUnconditional();
+        }
+        protected abstract Task Save();
+        private async Task EnableFlags()
+        {
+            int i = 0;
+            switch (IsNeedFlagActivate())
+            {
+                case EFlagActivate.Negative:
+                    break;
+                case EFlagActivate.Zero:
+                    i = 1;
+                    break;
+                case EFlagActivate.Positive:
+                    i = 2;
+                    break;
+                case EFlagActivate.Overflow: 
+                    i = 3;
+                    break;
+                default:
+                    return;
+            }
 
             Token.ThrowIfCancellationRequested();
 
-            var firstByte = _vm.CommandRegister.Value.Split()[0];
-            var secondByte = _vm.CommandRegister.Value.Split()[1];
-            var isSaveFirstPlace = _vm.processor.isFirstPlaceSaveResult(firstByte);
-            var place = _vm.processor.GetIndexDataRegister(secondByte, isSaveFirstPlace);
-            await _vm.ResultRegister.Animation();
-            await _vm.DataRegisters[place].Animation();
-            _vm.DataRegisters[place].Value = _vm.ResultRegister.Value;
+            await _vm.FlagRegisters[i].Animation();
+            _vm.FlagRegisters[i].Value = "True";
             
-            _vm.Step++;
+        }
+        protected bool IsEnableFlag()
+        {
+            int i = ((int)Type) - 3;
+            
+            if (i < 0 || i > 3) 
+                return false;
+
+            return _vm.FlagRegisters[i].Value == "True";
         }
         protected void Finish()
         {
@@ -181,6 +201,7 @@ namespace ProcessorCommands.Models.ProcessorCommands
             _vm.Step = -1;
             _vm.MaxStep = 999;
         }
+        
         public abstract List<string> GetErrorsValues();
         public abstract int MaxStep { get; }
 

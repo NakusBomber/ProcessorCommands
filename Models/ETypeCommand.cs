@@ -11,7 +11,10 @@ namespace ProcessorCommands.Models
         Arithmetic,
         Delivery,
         UnconditionalTransfer,
-        ConditionalTransfer,
+        ConditionalNegative,
+        ConditionalZero,
+        ConditionalPositive,
+        ConditionalOverflow,
 
         Unspecified = 999
     }

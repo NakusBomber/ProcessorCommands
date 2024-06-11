@@ -24,6 +24,11 @@ namespace ProcessorCommands.Models
         DecryptCommand,
         ExecutionCommand,
         SaveResult,
+        WithoutConditionTransfer,
+        CheckFlagNegative,
+        CheckFlagZero,
+        CheckFlagPositive,
+        CheckFlagOverflow,
         Finish
     }
 

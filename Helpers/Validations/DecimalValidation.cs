@@ -18,13 +18,16 @@ namespace ProcessorCommands.Helpers.Validations
             if (!int.TryParse(value, out int intValue))
                 errors.Add(Resources.General.LettersNotAllowed);
 
-            if (intValue < 0 || intValue > 255)
+            if (intValue < -255 || intValue > 255)
             {
-                errors.Add($"{Resources.General.OnlyByteValues} (0 - 255)");
+                errors.Add($"{Resources.General.OnlyByteValues} (-255 - 255)");
             }
 
             if (intValue > 0 && value.StartsWith("0"))
                 errors.Add($"{Resources.General.EntryMustNotStartWith} 0");
+
+            if (value.StartsWith("00"))
+                errors.Add($"{Resources.General.EntryMustNotStartWith} 00");
 
             return errors;
         }

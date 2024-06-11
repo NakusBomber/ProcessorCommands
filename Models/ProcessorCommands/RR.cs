@@ -60,13 +60,7 @@ namespace ProcessorCommands.Models.ProcessorCommands
                     errors.Add("Empty second value");
                 }
             }
-            if (typeCommand == ETypeCommand.Arithmetic && value2 != string.Empty && value1 != string.Empty)
-            {
-                if (Convert.ToInt32(value1) + Convert.ToInt32(value2) > 255)
-                {
-                    errors.Add("Overflow byte");
-                }
-            }
+            
             return errors;
         }
 
@@ -117,6 +111,80 @@ namespace ProcessorCommands.Models.ProcessorCommands
                 default:
                     break;
             }
+        }
+
+        protected override async Task ExecuteDelivery()
+        {
+            _vm.Status = ProgramStatus.ExecutionCommand;
+
+            Token.ThrowIfCancellationRequested();
+
+            var firstByte = _vm.CommandRegister.Value.Split()[0];
+            var secondByte = _vm.CommandRegister.Value.Split()[1];
+            var isFirstSavePlace = _vm.processor.isFirstPlaceSaveResult(firstByte);
+
+            var firstIndex = _vm.processor.GetIndexDataRegister(secondByte, true);
+            var secondIndex = _vm.processor.GetIndexDataRegister(secondByte, false);
+
+            var saveIndex = isFirstSavePlace ? firstIndex : secondIndex;
+            var dataIndex = isFirstSavePlace ? secondIndex : firstIndex;
+
+            await _vm.DataRegisters[dataIndex].Animation();
+            await _vm.DataRegisters[saveIndex].Animation();
+
+            Token.ThrowIfCancellationRequested();
+            _vm.DataRegisters[saveIndex].Value = _vm.DataRegisters[dataIndex].Value;
+
+            _vm.Step++;
+        }
+        protected override async Task SampleOperand(int numberOperand)
+        {
+            Token.ThrowIfCancellationRequested();
+
+            switch (numberOperand)
+            {
+                case 0:
+                    _vm.Status = ProgramStatus.Sample1Operand;
+                    break;
+                case 1:
+                    _vm.Status = ProgramStatus.Sample2Operand;
+                    break;
+                default:
+                    return;
+            }
+
+            var register = _vm.processor.GetIndexDataRegister(_vm.CommandRegister.Value.Split()[1], numberOperand == 0);
+            await _vm.DataRegisters[register].Animation();
+
+            Token.ThrowIfCancellationRequested();
+
+            if (numberOperand == 0)
+            {
+                await _vm.AluFirstRegister.Animation();
+                _vm.AluFirstRegister.Value = _vm.DataRegisters[register].Value;
+            }
+            else
+            {
+                await _vm.AluSecondRegister.Animation();
+                _vm.AluSecondRegister.Value = _vm.DataRegisters[register].Value;
+            }
+            _vm.Step++;
+        }
+        protected override async Task Save()
+        {
+            _vm.Status = ProgramStatus.SaveResult;
+
+            Token.ThrowIfCancellationRequested();
+
+            var firstByte = _vm.CommandRegister.Value.Split()[0];
+            var secondByte = _vm.CommandRegister.Value.Split()[1];
+            var isSaveFirstPlace = _vm.processor.isFirstPlaceSaveResult(firstByte);
+            var place = _vm.processor.GetIndexDataRegister(secondByte, isSaveFirstPlace);
+            await _vm.ResultRegister.Animation();
+            await _vm.DataRegisters[place].Animation();
+            _vm.DataRegisters[place].Value = _vm.ResultRegister.Value;
+
+            _vm.Step++;
         }
     }
 }

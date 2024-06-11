@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProcessorCommands.Commands
 {
@@ -42,6 +43,9 @@ namespace ProcessorCommands.Commands
 
             foreach (var item in _vm.RAM)
                 item.Value = e;
+
+            foreach (var item in _vm.FlagRegisters)
+                item.Value = "False";
 
             _vm.CommandRegister.Value = e;
             _vm.AluFirstRegister.Value = e;

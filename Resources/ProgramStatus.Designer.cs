@@ -61,6 +61,42 @@ namespace ProcessorCommands.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Перехід з умовою на від&apos;ємний.
+        /// </summary>
+        internal static string CheckFlagNegative {
+            get {
+                return ResourceManager.GetString("CheckFlagNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Перехід з умовою на переповнення.
+        /// </summary>
+        internal static string CheckFlagOverflow {
+            get {
+                return ResourceManager.GetString("CheckFlagOverflow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Перехід з умовою на позитивний.
+        /// </summary>
+        internal static string CheckFlagPositive {
+            get {
+                return ResourceManager.GetString("CheckFlagPositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Перехід з умовою на нуль.
+        /// </summary>
+        internal static string CheckFlagZero {
+            get {
+                return ResourceManager.GetString("CheckFlagZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Декодування кода операції.
         /// </summary>
         internal static string DecryptCommand {
@@ -183,6 +219,15 @@ namespace ProcessorCommands.Resources {
         internal static string Stop {
             get {
                 return ResourceManager.GetString("Stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Перехід без умови.
+        /// </summary>
+        internal static string WithoutConditionTransfer {
+            get {
+                return ResourceManager.GetString("WithoutConditionTransfer", resourceCulture);
             }
         }
     }

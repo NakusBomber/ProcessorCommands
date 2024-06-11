@@ -180,6 +180,9 @@
   <data name="FirstRegisterDescription" xml:space="preserve">
     <value>First register</value>
   </data>
+  <data name="FlagRegisterDescription" xml:space="preserve">
+    <value>Flag register</value>
+  </data>
   <data name="IconsBy" xml:space="preserve">
     <value>Icons by </value>
   </data>
@@ -198,6 +201,9 @@
   <data name="MainWindowTitle" xml:space="preserve">
     <value>Demonstration of command execution</value>
   </data>
+  <data name="Negative" xml:space="preserve">
+    <value>Negative</value>
+  </data>
   <data name="NumberMustBeByte" xml:space="preserve">
     <value>The number must be within a byte</value>
   </data>
@@ -207,8 +213,14 @@
   <data name="OnlyHexLettersAndNumbers" xml:space="preserve">
     <value>Numbers and letters A-F only (hexadecimal input starting with "0x")</value>
   </data>
+  <data name="Overflow" xml:space="preserve">
+    <value>Overflow</value>
+  </data>
   <data name="Paste" xml:space="preserve">
     <value>Paste</value>
+  </data>
+  <data name="Positive" xml:space="preserve">
+    <value>Positive</value>
   </data>
   <data name="PushZero" xml:space="preserve">
     <value>Append to byte</value>
@@ -254,5 +266,8 @@
   </data>
   <data name="WordRegisterDescription" xml:space="preserve">
     <value>Word register</value>
+  </data>
+  <data name="Zero" xml:space="preserve">
+    <value>Zero</value>
   </data>
 </root>

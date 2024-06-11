@@ -21,7 +21,7 @@ namespace ProcessorCommands.ViewModels
     {
         public Intel8080Model processor; 
         private ProcessorCommand processorCommand = null;
-		public MainViewModel()
+        public MainViewModel()
 		{
             processor = new Intel8080Model();
 			Status = ProgramStatus.Nothing;
@@ -72,6 +72,19 @@ namespace ProcessorCommands.ViewModels
             for (int i = 0; i < processor.SizeRAM; i++)
             {
                 RAM.Add(new BinaryDecimalInputItem($"{i:X2}"));
+            }
+
+            FlagRegisters = new ObservableCollection<InputItem>();
+            var flagLabels = new List<string>
+            {
+                Resources.General.Negative,
+                Resources.General.Zero,
+                Resources.General.Positive,
+                Resources.General.Overflow,
+            };
+            for(int i = 0; i < 4; i++)
+            {
+                FlagRegisters.Add(new BoolInputItem(flagLabels[i], "False"));
             }
         }
 
@@ -304,6 +317,7 @@ namespace ProcessorCommands.ViewModels
                 || BaseRegisters.Any(e => e.HasErrors)
                 || IndexRegisters.Any(e => e.HasErrors)
                 || RAM.Any(e => e.HasErrors)
+                || FlagRegisters.Any(e => e.HasErrors)
                 || CommandRegister.HasErrors
                 || AluFirstRegister.HasErrors
                 || AluSecondRegister.HasErrors
@@ -351,6 +365,16 @@ namespace ProcessorCommands.ViewModels
             private set
             {
                 _ram = value;
+            }
+        }
+
+        private ObservableCollection<InputItem> _flagRegisters;
+        public ObservableCollection<InputItem> FlagRegisters
+        {
+            get { return _flagRegisters; }
+            private set
+            {
+               _flagRegisters = value;
             }
         }
 

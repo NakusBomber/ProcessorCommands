@@ -21,5 +21,15 @@ namespace ProcessorCommands.Models.ProcessorCommands
         {
             throw new NotImplementedException();
         }
+
+        protected override Task SampleOperand(int numberOperand)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task Save()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

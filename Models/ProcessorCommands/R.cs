@@ -54,15 +54,6 @@ namespace ProcessorCommands.Models.ProcessorCommands
                 }
             }
 
-
-            if (typeCommand == ETypeCommand.Arithmetic && value2 != string.Empty && value1 != string.Empty)
-            {
-                if (Convert.ToInt32(value1) + Convert.ToInt32(value2) > 255)
-                {
-                    errors.Add("Overflow byte");
-                }
-            }
-
             return errors;
         }
 
