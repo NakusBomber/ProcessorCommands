@@ -90,14 +90,11 @@ namespace ProcessorCommands.ViewModels
 
         private bool CanStartExecuteCommand()
         {
+            
+            processorCommand = ProcessorCommandCreator.Create(this);
+
             if (processorCommand == null)
-            {
-                processorCommand = ProcessorCommandCreator.Create(this);
-
-                if (processorCommand == null)
-                    return false;
-
-            }
+                return false;
 
             var errors = processorCommand.GetErrorsValues();
             if (errors.Count > 0)

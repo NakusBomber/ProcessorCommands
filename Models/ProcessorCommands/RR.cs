@@ -2,19 +2,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ProcessorCommands.Models.ProcessorCommands
 {
-    public class RR : ProcessorCommand
+    public class RR : TwoByteProcessorCommand
     {
         public RR(MainViewModel vm) : base(vm)
         {
         }
 
         public override int MaxStep {
-            get => 6;
+            get
+            {
+                if(Type == ETypeCommand.Arithmetic)
+                {
+                    return 6;
+                }
+                return 4;
+            }
         }
 
         public override ECommands Command => ECommands.RR;
@@ -27,13 +35,14 @@ namespace ProcessorCommands.Models.ProcessorCommands
             var firstByte = _vm.RAM[intAddress].Value;
             var typeCommand = _vm.processor.GetTypeCommand(firstByte);
             var isFirstSavePlace = _vm.processor.isFirstPlaceSaveResult(firstByte);
-            if (typeCommand != ETypeCommand.Arithmetic && typeCommand != ETypeCommand.Delivery)
+
+            if (!SupportedTypes.Contains(typeCommand))
             {
                 errors.Add("This type of command does not exist");
                 return errors;
             }
-
-            if(intAddress >= 255 || _vm.RAM[intAddress+1].Value == string.Empty)
+            
+            if (intAddress >= 255 || _vm.RAM[intAddress+1].Value == string.Empty)
             {
                 errors.Add("Not found second byte command");
                 return errors;
@@ -64,25 +73,12 @@ namespace ProcessorCommands.Models.ProcessorCommands
             return errors;
         }
 
-        public override async Task MakeStep()
+        protected override async Task ArithmeticAlgorithm()
         {
-            if(_vm.Step < 1)
-            {
-                await base.MakeStep();
-                return;
-            }
-
-            _vm.MaxStep = MaxStep;
-
-
             switch (_vm.Step)
             {
                 case 1:
                     await SampleByteCommand(1);
-
-                    if(Type == ETypeCommand.Delivery)
-                        _vm.Step = 4;
-
                     break;
                 case 2:
                     await SampleOperand(0);
@@ -91,20 +87,29 @@ namespace ProcessorCommands.Models.ProcessorCommands
                     await SampleOperand(1);
                     break;
                 case 4:
-                    if(Type == ETypeCommand.Arithmetic)
-                    {
-                        await ExecuteArithmetic();
-                    }
-                    else
-                    {
-                        await ExecuteDelivery();
-                    }
+                    await ExecuteArithmetic();
                     break;
                 case 5:
-                    
-                    if(Type == ETypeCommand.Arithmetic)
-                        await Save();
+                    await Save();
+                    await Delay(400);
+                    Finish();
+                    break;
+                default:
+                    break;
+            }
+        }
 
+        protected override async Task DeliveryAlgorithm()
+        {
+            switch (_vm.Step)
+            {
+                case 1:
+                    await SampleByteCommand(1);
+                    break;
+                case 2:
+                    await ExecuteDelivery();
+                    break;
+                case 3:
                     await Delay(400);
                     Finish();
                     break;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProcessorCommands.Models.ProcessorCommands
 {
-    public class RX : ProcessorCommand
+    public class RX : TwoByteProcessorCommand
     {
         public RX(MainViewModel vm) : base(vm)
         {
@@ -18,6 +18,21 @@ namespace ProcessorCommands.Models.ProcessorCommands
         public override ECommands Command => throw new NotImplementedException();
 
         public override List<string> GetErrorsValues()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task ArithmeticAlgorithm()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task DeliveryAlgorithm()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task ExecuteDelivery()
         {
             throw new NotImplementedException();
         }

@@ -97,7 +97,6 @@ namespace ProcessorCommands.Models.ProcessorCommands
 
             _vm.Step++;
         }
-        protected abstract Task SampleOperand(int numberOperand);
         protected async Task ExecuteArithmetic()
         {
             _vm.Status = ProgramStatus.ExecutionCommand;
@@ -119,46 +118,10 @@ namespace ProcessorCommands.Models.ProcessorCommands
 
             _vm.Step++;
         }
-        protected virtual Task ExecuteDelivery()
-        {
-            throw new NotImplementedException();
-        }
-        protected virtual Task ExecuteUnconditional()
-        {
-            throw new NotImplementedException();
-        }
-        protected virtual async Task ExecuteConditional()
-        {
-            switch (Type)
-            {
-                case ETypeCommand.ConditionalNegative:
-                    _vm.Status = ProgramStatus.CheckFlagNegative;
-                    break;
-                case ETypeCommand.ConditionalZero:
-                    _vm.Status = ProgramStatus.CheckFlagZero;
-                    break;
-                case ETypeCommand.ConditionalPositive:
-                    _vm.Status = ProgramStatus.CheckFlagPositive;
-                    break;
-                case ETypeCommand.ConditionalOverflow:
-                    _vm.Status = ProgramStatus.CheckFlagOverflow;
-                    break;
-                default:
-                    return;
-            }
-
-            int i = ((int)Type)-3;
-
-            await _vm.FlagRegisters[i].Animation();
-            if (!IsEnableFlag())
-            {
-                Finish();
-                return;
-            }
-
-            await ExecuteUnconditional();
-        }
+        
+        protected abstract Task SampleOperand(int numberOperand);
         protected abstract Task Save();
+        
         private async Task EnableFlags()
         {
             int i = 0;
@@ -185,15 +148,7 @@ namespace ProcessorCommands.Models.ProcessorCommands
             _vm.FlagRegisters[i].Value = "True";
             
         }
-        protected bool IsEnableFlag()
-        {
-            int i = ((int)Type) - 3;
-            
-            if (i < 0 || i > 3) 
-                return false;
-
-            return _vm.FlagRegisters[i].Value == "True";
-        }
+        
         protected void Finish()
         {
             _vm.Status = ProgramStatus.Finish;
@@ -215,8 +170,18 @@ namespace ProcessorCommands.Models.ProcessorCommands
 
         public abstract ECommands Command { get; }
 
-        public virtual async Task MakeStep()
+        private bool isStartStep() => _vm.Step < 1;
+        protected abstract Task MakeStepAfterStart();
+
+        public async Task MakeStep()
         {
+            if(!isStartStep())
+            {
+                _vm.MaxStep = MaxStep;
+                await MakeStepAfterStart();
+                return;
+            }
+
             switch (_vm.Step)
             {
                 case -1:

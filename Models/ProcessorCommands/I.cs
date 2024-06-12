@@ -7,19 +7,119 @@ using System.Threading.Tasks;
 
 namespace ProcessorCommands.Models.ProcessorCommands
 {
-    public class I : ProcessorCommand
+    public class I : OneByteProcessorCommand
     {
         public I(MainViewModel vm) : base(vm)
         {
         }
 
-        public override int MaxStep => 5;
+        public override int MaxStep
+        {
+            get
+            {
+                if(Type == ETypeCommand.Arithmetic)
+                {
+                    return 5;
+                }
+                return 4;
+            }
+        }
 
         public override ECommands Command => ECommands.I;
 
         public override List<string> GetErrorsValues()
         {
-            return new List<string>();
+            var errors = new List<string>();
+
+            var intAddress = Convert.ToInt32(_vm.CounterAddress.Value, 16);
+            var firstByte = _vm.RAM[intAddress].Value;
+            var typeCommand = _vm.processor.GetTypeCommand(firstByte);
+
+            if (!SupportedTypes.Contains(typeCommand))
+            {
+                errors.Add("This type of command does not exist");
+                return errors;
+            }
+
+            if (intAddress >= 255 || _vm.RAM[intAddress + 1].Value == string.Empty)
+            {
+                errors.Add("Not found second byte command");
+                return errors;
+            }
+
+            var value1 = _vm.AluFirstRegister.Value;
+
+            if (typeCommand == ETypeCommand.Arithmetic)
+            {
+                if (value1 == string.Empty)
+                {
+                    errors.Add("Empty alu first register value");
+                }
+            }
+
+            
+            return errors;
+        }
+
+        protected override async Task UnconditionalAlgorithm()
+        {
+            switch (_vm.Step)
+            {
+                case 1:
+                    await SampleByteCommand(1);
+                    break;
+                case 2:
+                    await ExecuteConditional();
+                    break;
+                case 3:
+                    await Delay(400);
+                    Finish();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        protected override async Task DeliveryAlgorithm()
+        {
+            switch (_vm.Step)
+            {
+                case 1:
+                    await SampleByteCommand(1);
+                    break;
+                case 2:
+                    await ExecuteDelivery();
+                    break;
+                case 3:
+                    await Delay(400);
+                    Finish();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        protected override async Task ArithmeticAlgorithm()
+        {
+            switch (_vm.Step)
+            {
+                case 1:
+                    await SampleByteCommand(1);
+                    break;
+                case 2:
+                    await SampleOperand();
+                    break;
+                case 3:
+                    await ExecuteArithmetic();
+                    break;
+                case 4:
+                    await Save();
+                    await Delay(400);
+                    Finish();
+                    break;
+                default:
+                    break;
+            }
         }
 
         protected override async Task ExecuteDelivery()
@@ -91,66 +191,5 @@ namespace ProcessorCommands.Models.ProcessorCommands
             _vm.Step++;
         }
 
-        public override async Task MakeStep()
-        {
-            if (_vm.Step < 1)
-            {
-                await base.MakeStep();
-                return;
-            }
-
-            _vm.MaxStep = MaxStep;
-
-            switch (_vm.Step)
-            {
-                case 1:
-                    await SampleByteCommand(1);
-
-                    if (Type == ETypeCommand.Arithmetic)
-                        _vm.Step = 2;
-                    else
-                        _vm.Step = 3;
-
-                    break;
-                case 2:
-                    await SampleOperand();
-                    break;
-                case 3:
-                    if (Type == ETypeCommand.Arithmetic)
-                    {
-                        await ExecuteArithmetic();
-                    }
-                    if (Type == ETypeCommand.Delivery)
-                    {
-                        await ExecuteDelivery();
-                    }
-                    if(Type == ETypeCommand.UnconditionalTransfer)
-                    {
-                        await ExecuteUnconditional();
-                    }
-                    var conditionList = new List<ETypeCommand>
-                    {
-                        ETypeCommand.ConditionalNegative,
-                        ETypeCommand.ConditionalZero,
-                        ETypeCommand.ConditionalPositive,
-                        ETypeCommand.ConditionalOverflow
-                    };
-                    if(conditionList.Contains(Type))
-                    {
-                        await ExecuteConditional();
-                    }
-                    break;
-                case 4:
-
-                    if (Type == ETypeCommand.Arithmetic)
-                        await Save();
-
-                    await Delay(400);
-                    Finish();
-                    break;
-                default:
-                    break;
-            }
-        }
     }
 }

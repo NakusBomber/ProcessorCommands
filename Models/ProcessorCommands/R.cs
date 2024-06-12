@@ -7,16 +7,25 @@ using System.Threading.Tasks;
 
 namespace ProcessorCommands.Models.ProcessorCommands
 {
-    public class R : ProcessorCommand
+    public class R : OneByteProcessorCommand
     {
         public R(MainViewModel vm) : base(vm)
         {
         }
-
-        public override int MaxStep => 5;
-
         public override ECommands Command => ECommands.R;
+        public override int MaxStep
+        {
+            get
+            {
+                if(Type == ETypeCommand.Arithmetic)
+                {
+                    return 5;
+                }
+                return 4;
+            }
+        }
 
+        
         public override List<string> GetErrorsValues()
         {
             var errors = new List<string>();
@@ -25,6 +34,12 @@ namespace ProcessorCommands.Models.ProcessorCommands
             var firstByte = _vm.RAM[intAddress].Value;
             var typeCommand = _vm.processor.GetTypeCommand(firstByte);
             var isFirstSavePlace = _vm.processor.isFirstPlaceSaveResult(firstByte);
+
+            if (!SupportedTypes.Contains(typeCommand))
+            {
+                errors.Add("This type of command does not exist");
+                return errors;
+            }
 
             if (intAddress >= 255 || _vm.RAM[intAddress + 1].Value == string.Empty)
             {
@@ -36,7 +51,7 @@ namespace ProcessorCommands.Models.ProcessorCommands
             var value1 = _vm.AluFirstRegister.Value;
             var value2 = _vm.DataRegisters[_vm.processor.GetIndexDataRegister(secondByte, true)].Value;
 
-            if (typeCommand == ETypeCommand.Arithmetic ||
+            if (typeCommand != ETypeCommand.Delivery ||
                 (typeCommand == ETypeCommand.Delivery && !isFirstSavePlace))
             {
                 if (value1 == string.Empty)
@@ -45,7 +60,7 @@ namespace ProcessorCommands.Models.ProcessorCommands
                 }
             }
 
-            if (typeCommand == ETypeCommand.Arithmetic ||
+            if (typeCommand != ETypeCommand.Delivery ||
                 (typeCommand == ETypeCommand.Delivery && isFirstSavePlace))
             {
                 if (value2 == string.Empty)
@@ -57,21 +72,97 @@ namespace ProcessorCommands.Models.ProcessorCommands
             return errors;
         }
 
-        protected override async Task SampleOperand(int numberOperand = 0)
+        protected override async Task ArithmeticAlgorithm()
         {
+            switch (_vm.Step)
+            {
+                case 1:
+                    await SampleByteCommand(1);
+                    break;
+                case 2:
+                    await SampleOperand();
+                    break;
+                case 3:
+                    await ExecuteDelivery();
+                    break;
+                case 4:
+                    await Save();
+                    await Delay(400);
+                    Finish();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        protected override async Task DeliveryAlgorithm()
+        {
+            switch (_vm.Step)
+            {
+                case 1:
+                    await SampleByteCommand(1);
+                    break;
+                case 2:
+                    await ExecuteDelivery();
+                    break;
+                case 3:
+                    await Delay(400);
+                    Finish();
+                    break;
+                default:
+                    break;
+            }
+        }
+        protected override async Task UnconditionalAlgorithm()
+        {
+            switch (_vm.Step)
+            {
+                case 1:
+                    await SampleByteCommand(1);
+                    break;
+                case 2:
+                    await ExecuteConditional();
+                    break;
+                case 3:
+                    await Delay(400);
+                    Finish();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        protected override async Task ExecuteUnconditional()
+        {
+            if (Type == ETypeCommand.UnconditionalTransfer)
+            {
+                _vm.Status = ProgramStatus.WithoutConditionTransfer;
+            }
+
             Token.ThrowIfCancellationRequested();
 
-            _vm.Status = ProgramStatus.Sample2Operand;
+            var place = _vm.processor.GetIndexDataRegister(_vm.CommandRegister.Value.Split()[1], true);
+            var data = Convert.ToInt32(_vm.DataRegisters[place].Value);
 
-            var register = _vm.processor.GetIndexDataRegister(_vm.CommandRegister.Value.Split()[1], true);
-            await _vm.DataRegisters[register].Animation();
+            if (data < 0)
+                data = 0;
 
-            await _vm.AluSecondRegister.Animation();
-            _vm.AluSecondRegister.Value = _vm.DataRegisters[register].Value;
+            var dataString = $"0x{data:X2}";
+            await _vm.DataRegisters[place].Animation();
+
+            await _vm.CounterAddress.Animation();
+            _vm.CounterAddress.Value = dataString;
+
+            if (Type != ETypeCommand.UnconditionalTransfer)
+            {
+                foreach (var item in _vm.FlagRegisters)
+                {
+                    item.Value = "False";
+                }
+            }
 
             _vm.Step++;
         }
-
         protected override async Task Save()
         {
             _vm.Status = ProgramStatus.SaveResult;
@@ -111,7 +202,7 @@ namespace ProcessorCommands.Models.ProcessorCommands
 
             var index = _vm.processor.GetIndexDataRegister(secondByte, true);
 
-            if(isFirstSavePlace)
+            if (isFirstSavePlace)
             {
                 await _vm.DataRegisters[index].Animation();
                 await _vm.AluFirstRegister.Animation();
@@ -133,49 +224,19 @@ namespace ProcessorCommands.Models.ProcessorCommands
             _vm.Step++;
         }
 
-        public override async Task MakeStep()
+        protected override async Task SampleOperand(int numberOperand = 0)
         {
-            if (_vm.Step < 1)
-            {
-                await base.MakeStep();
-                return;
-            }
+            Token.ThrowIfCancellationRequested();
 
-            _vm.MaxStep = MaxStep;
+            _vm.Status = ProgramStatus.Sample2Operand;
 
-            switch (_vm.Step)
-            {
-                case 1:
-                    await SampleByteCommand(1);
+            var register = _vm.processor.GetIndexDataRegister(_vm.CommandRegister.Value.Split()[1], true);
+            await _vm.DataRegisters[register].Animation();
 
-                    if (Type == ETypeCommand.Delivery)
-                        _vm.Step = 3;
+            await _vm.AluSecondRegister.Animation();
+            _vm.AluSecondRegister.Value = _vm.DataRegisters[register].Value;
 
-                    break;
-                case 2:
-                    await SampleOperand();
-                    break;
-                case 3:
-                    if(Type == ETypeCommand.Arithmetic)
-                    {
-                        await ExecuteArithmetic();
-                    }
-                    if(Type == ETypeCommand.Delivery)
-                    {
-                        await ExecuteDelivery();
-                    }
-                    break;
-                case 4:
-
-                    if (Type == ETypeCommand.Arithmetic)
-                        await Save();
-
-                    await Delay(400);
-                    Finish();
-                    break;
-                default:
-                    break;
-            }
+            _vm.Step++;
         }
     }
 }

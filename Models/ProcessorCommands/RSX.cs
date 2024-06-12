@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProcessorCommands.Models.ProcessorCommands
 {
-    public class RSX : ProcessorCommand
+    public class RSX : ThreeByteProcessorCommand
     {
         public RSX(MainViewModel vm) : base(vm)
         {
@@ -18,6 +18,16 @@ namespace ProcessorCommands.Models.ProcessorCommands
         public override ECommands Command => throw new NotImplementedException();
 
         public override List<string> GetErrorsValues()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task ArithmeticAlgorithm()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task MakeStepAfterStart()
         {
             throw new NotImplementedException();
         }

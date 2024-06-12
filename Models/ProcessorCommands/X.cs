@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProcessorCommands.Models.ProcessorCommands
 {
-    public class X : ProcessorCommand
+    public class X : OneByteProcessorCommand
     {
         public X(MainViewModel vm) : base(vm)
         {
@@ -22,12 +22,37 @@ namespace ProcessorCommands.Models.ProcessorCommands
             throw new NotImplementedException();
         }
 
+        protected override Task ArithmeticAlgorithm()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task DeliveryAlgorithm()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task ExecuteDelivery()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task ExecuteUnconditional()
+        {
+            throw new NotImplementedException();
+        }
+
         protected override Task SampleOperand(int numberOperand)
         {
             throw new NotImplementedException();
         }
 
         protected override Task Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task UnconditionalAlgorithm()
         {
             throw new NotImplementedException();
         }
